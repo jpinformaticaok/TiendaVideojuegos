@@ -21,6 +21,7 @@ namespace Desktop.Services
             httpVentas = new HttpClient { BaseAddress = new Uri(urlVentas) };
             httpVentas.DefaultRequestHeaders.Add("Accept", "application/json");
             httpVentas.DefaultRequestHeaders.Add("apikey", apikey);
+            httpVentas.DefaultRequestHeaders.Add("Prefer", "return=representation");
             httpDetalles = new HttpClient { BaseAddress = new Uri(urlDetalles) };
             httpDetalles.DefaultRequestHeaders.Add("Accept", "application/json");
             httpDetalles.DefaultRequestHeaders.Add("apikey", apikey);
@@ -64,9 +65,14 @@ namespace Desktop.Services
                 }
                 venta.Total = total;
 
-                var json = JsonSerializer.Serialize(venta, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, PropertyNameCaseInsensitive = true });
-                // remove Detalles from venta payload (send separately)
-                var ventaPayload = new { venta.Number, venta.Date, cliente_id = venta.ClienteId, venta.Total, venta.isDeleted };
+                var ventaPayload = new Dictionary<string, object?>
+                {
+                    ["number"] = venta.Number,
+                    ["date"] = venta.Date,
+                    ["cliente_id"] = venta.ClienteId,
+                    ["total"] = venta.Total,
+                    ["is_deleted"] = false
+                };
                 var vjson = JsonSerializer.Serialize(ventaPayload, options);
                 var content = new StringContent(vjson, Encoding.UTF8, "application/json");
                 var response = await httpVentas.PostAsync("", content);
@@ -75,17 +81,35 @@ namespace Desktop.Services
                     MessageBox.Show("Error al crear la venta: " + response.ReasonPhrase);
                     return false;
                 }
-                // get created venta id from response
+
                 var respJson = await response.Content.ReadAsStringAsync();
-                var created = JsonSerializer.Deserialize<Venta>(respJson, options);
-                int ventaId = created?.Id ?? 0;
+                var creadas = JsonSerializer.Deserialize<List<Venta>>(respJson, options);
+                int ventaId = creadas?.FirstOrDefault()?.Id ?? 0;
+                if (ventaId == 0)
+                {
+                    MessageBox.Show("No se pudo obtener el ID de la venta creada.");
+                    return false;
+                }
 
                 foreach (var d in venta.Detalles)
                 {
                     d.VentaId = ventaId;
-                    var dj = JsonSerializer.Serialize(d, options);
+                    var detallePayload = new Dictionary<string, object?>
+                    {
+                        ["venta_id"] = d.VentaId,
+                        ["producto_id"] = d.ProductoId,
+                        ["quantity"] = d.Quantity,
+                        ["unit_price"] = d.UnitPrice,
+                        ["subtotal"] = d.Subtotal
+                    };
+                    var dj = JsonSerializer.Serialize(detallePayload, options);
                     var dc = new StringContent(dj, Encoding.UTF8, "application/json");
-                    await httpDetalles.PostAsync("", dc);
+                    var detalleResponse = await httpDetalles.PostAsync("", dc);
+                    if (!detalleResponse.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Error al crear el detalle de la venta: " + detalleResponse.ReasonPhrase);
+                        return false;
+                    }
                 }
                 return true;
             }
