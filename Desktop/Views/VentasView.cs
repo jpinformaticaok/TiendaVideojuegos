@@ -1,22 +1,29 @@
 using Desktop.Services;
+using FontAwesome.Sharp;
 using Services.Models;
 
 namespace Desktop.Views
 {
     public partial class VentasView : Form
     {
-        ClientesService clientesService = new ClientesService();
-        ProductosService productosService = new ProductosService();
-        VentasService ventasService = new VentasService();
-        ComboBox cmbCliente = new ComboBox();
-        ComboBox cmbProducto = new ComboBox();
-        TextBox txtCantidad = new TextBox();
-        Button btnAgregar = new Button();
-        DataGridView gridItems = new DataGridView();
-        Label lblTotal = new Label();
-        Button btnGuardar = new Button();
-        List<DetalleVenta> items = new List<DetalleVenta>();
-        List<Producto> productos = new List<Producto>();
+        private ClientesService clientesService = new ClientesService();
+        private ProductosService productosService = new ProductosService();
+        private VentasService ventasService = new VentasService();
+
+        private Label label1 = new Label();
+        private Label label2 = new Label();
+        private Label label3 = new Label();
+        private Label label4 = new Label();
+        private Label lblTotal = new Label();
+        private ComboBox cmbCliente = new ComboBox();
+        private ComboBox cmbProducto = new ComboBox();
+        private TextBox txtCantidad = new TextBox();
+        private IconButton btnAgregar = new IconButton();
+        private IconButton btnQuitar = new IconButton();
+        private IconButton btnGuardar = new IconButton();
+        private DataGridView gridItems = new DataGridView();
+        private List<DetalleVenta> items = new List<DetalleVenta>();
+        private List<Producto> productos = new List<Producto>();
 
         public VentasView()
         {
@@ -27,25 +34,99 @@ namespace Desktop.Views
         private void InitializeComponent()
         {
             this.Text = "Ventas";
-            this.Size = new Size(700, 500);
-            this.Controls.Add(new Label { Text = "Cliente", Left = 10, Top = 10, Width = 60 });
-            cmbCliente.Left = 80; cmbCliente.Top = 8; cmbCliente.Width = 250; cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.Controls.Add(cmbCliente);
-            this.Controls.Add(new Label { Text = "Producto", Left = 10, Top = 40, Width = 60 });
-            cmbProducto.Left = 80; cmbProducto.Top = 38; cmbProducto.Width = 250; cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.Controls.Add(cmbProducto);
-            this.Controls.Add(new Label { Text = "Cantidad", Left = 340, Top = 40, Width = 60 });
-            txtCantidad.Left = 410; txtCantidad.Top = 38; txtCantidad.Width = 60; txtCantidad.Text = "1";
-            this.Controls.Add(txtCantidad);
-            btnAgregar.Text = "Agregar"; btnAgregar.Left = 480; btnAgregar.Top = 36;
+            this.ClientSize = new Size(800, 450);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Name = "VentasView";
+
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 9);
+            label1.Text = "Facturación - Ventas";
+
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 60);
+            label2.Text = "Cliente";
+            cmbCliente.Location = new Point(90, 56);
+            cmbCliente.Name = "cmbCliente";
+            cmbCliente.Size = new Size(300, 23);
+            cmbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 100);
+            label3.Text = "Producto";
+            cmbProducto.Location = new Point(90, 96);
+            cmbProducto.Name = "cmbProducto";
+            cmbProducto.Size = new Size(300, 23);
+            cmbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            label4.AutoSize = true;
+            label4.Location = new Point(410, 100);
+            label4.Text = "Cantidad";
+            txtCantidad.Location = new Point(480, 96);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(60, 23);
+            txtCantidad.Text = "1";
+
+            btnAgregar.IconChar = IconChar.Plus;
+            btnAgregar.IconColor = Color.Black;
+            btnAgregar.IconFont = IconFont.Auto;
+            btnAgregar.IconSize = 15;
+            btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAgregar.Location = new Point(560, 95);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(90, 23);
+            btnAgregar.Text = " Agregar";
+            btnAgregar.UseVisualStyleBackColor = true;
             btnAgregar.Click += (s, e) => AgregarItem();
-            this.Controls.Add(btnAgregar);
-            gridItems.Left = 10; gridItems.Top = 70; gridItems.Width = 660; gridItems.Height = 300;
-            this.Controls.Add(gridItems);
-            lblTotal.Left = 10; lblTotal.Top = 380; lblTotal.Width = 200; lblTotal.Text = "Total: 0";
-            this.Controls.Add(lblTotal);
-            btnGuardar.Text = "Guardar Venta"; btnGuardar.Left = 10; btnGuardar.Top = 410;
+
+            btnQuitar.IconChar = IconChar.Trash;
+            btnQuitar.IconColor = Color.Black;
+            btnQuitar.IconFont = IconFont.Auto;
+            btnQuitar.IconSize = 15;
+            btnQuitar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnQuitar.Location = new Point(660, 95);
+            btnQuitar.Name = "btnQuitar";
+            btnQuitar.Size = new Size(90, 23);
+            btnQuitar.Text = " Quitar";
+            btnQuitar.UseVisualStyleBackColor = true;
+            btnQuitar.Click += (s, e) => QuitarItem();
+
+            gridItems.AllowUserToAddRows = false;
+            gridItems.AllowUserToDeleteRows = false;
+            gridItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridItems.Location = new Point(12, 140);
+            gridItems.Name = "gridItems";
+            gridItems.ReadOnly = true;
+            gridItems.Size = new Size(760, 230);
+
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotal.Location = new Point(12, 385);
+            lblTotal.Text = "Total: 0";
+
+            btnGuardar.IconChar = IconChar.Save;
+            btnGuardar.IconColor = Color.Black;
+            btnGuardar.IconFont = IconFont.Auto;
+            btnGuardar.IconSize = 15;
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(640, 380);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(132, 30);
+            btnGuardar.Text = "Guardar Venta";
+            btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += async (s, e) => await GuardarVenta();
+
+            this.Controls.Add(label1);
+            this.Controls.Add(label2);
+            this.Controls.Add(cmbCliente);
+            this.Controls.Add(label3);
+            this.Controls.Add(cmbProducto);
+            this.Controls.Add(label4);
+            this.Controls.Add(txtCantidad);
+            this.Controls.Add(btnAgregar);
+            this.Controls.Add(btnQuitar);
+            this.Controls.Add(gridItems);
+            this.Controls.Add(lblTotal);
             this.Controls.Add(btnGuardar);
         }
 
@@ -80,6 +161,15 @@ namespace Desktop.Views
                 Subtotal = qty * prod.Price
             });
             RefreshGrid();
+        }
+
+        private void QuitarItem()
+        {
+            if (gridItems.CurrentRow != null && gridItems.CurrentRow.Index < items.Count)
+            {
+                items.RemoveAt(gridItems.CurrentRow.Index);
+                RefreshGrid();
+            }
         }
 
         private void RefreshGrid()

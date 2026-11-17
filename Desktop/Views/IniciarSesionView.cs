@@ -1,6 +1,7 @@
 using DotNetEnv;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using FontAwesome.Sharp;
 
 namespace Desktop.Views
 {
@@ -10,11 +11,14 @@ namespace Desktop.Views
         string? authDomain, apiKey;
         int intentos = 0;
 
-        TextBox txtUsuario = new TextBox();
-        TextBox txtPassword = new TextBox();
-        CheckBox chkVerPassword = new CheckBox();
-        Button btnIniciarSesion = new Button();
-        Button btnCancelar = new Button();
+        private Label label1 = new Label();
+        private Label label2 = new Label();
+        private TextBox txtUsuario = new TextBox();
+        private TextBox txtPassword = new TextBox();
+        private CheckBox chkVerPassword = new CheckBox();
+        private IconButton btnIniciarSesion = new IconButton();
+        private IconButton btnCancelar = new IconButton();
+        private PictureBox pictureBox1 = new PictureBox();
 
         public IniciarSesionView()
         {
@@ -28,19 +32,100 @@ namespace Desktop.Views
         private void InitializeComponent()
         {
             this.Text = "Iniciar Sesión";
-            this.Size = new Size(360, 220);
+            this.ClientSize = new Size(987, 355);
             this.StartPosition = FormStartPosition.CenterScreen;
-            var lblU = new Label { Text = "Usuario", Left = 20, Top = 20, Width = 80 };
-            txtUsuario.Left = 110; txtUsuario.Top = 20; txtUsuario.Width = 200;
-            var lblP = new Label { Text = "Contraseña", Left = 20, Top = 60, Width = 80 };
-            txtPassword.Left = 110; txtPassword.Top = 60; txtPassword.Width = 200; txtPassword.PasswordChar = '*';
-            chkVerPassword.Text = "Ver contraseña"; chkVerPassword.Left = 110; chkVerPassword.Top = 90;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "IniciarSesionView";
+
+            pictureBox1.Image = CrearLogo();
+            pictureBox1.Location = new Point(30, 38);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(313, 286);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabStop = false;
+
+            label1.AutoSize = true;
+            label1.Location = new Point(376, 67);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.Text = "Usuario";
+
+            label2.AutoSize = true;
+            label2.Location = new Point(376, 107);
+            label2.Name = "label2";
+            label2.Size = new Size(67, 15);
+            label2.Text = "Contraseña";
+
+            txtUsuario.Location = new Point(452, 59);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(478, 23);
+
+            txtPassword.Location = new Point(452, 107);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(478, 23);
+
+            chkVerPassword.AutoSize = true;
+            chkVerPassword.Location = new Point(452, 171);
+            chkVerPassword.Name = "chkVerPassword";
+            chkVerPassword.Size = new Size(105, 19);
+            chkVerPassword.Text = "Ver Contraseña";
+            chkVerPassword.UseVisualStyleBackColor = true;
             chkVerPassword.CheckedChanged += chkVerPassword_CheckedChanged;
-            btnIniciarSesion.Text = "Iniciar Sesión"; btnIniciarSesion.Left = 110; btnIniciarSesion.Top = 120;
+
+            btnIniciarSesion.IconChar = IconChar.Unlock;
+            btnIniciarSesion.IconColor = Color.Black;
+            btnIniciarSesion.IconFont = IconFont.Auto;
+            btnIniciarSesion.IconSize = 15;
+            btnIniciarSesion.ImageAlign = ContentAlignment.MiddleLeft;
+            btnIniciarSesion.Location = new Point(472, 217);
+            btnIniciarSesion.Name = "btnIniciarSesion";
+            btnIniciarSesion.Size = new Size(97, 23);
+            btnIniciarSesion.Text = "Iniciar Sesión";
+            btnIniciarSesion.TextAlign = ContentAlignment.MiddleRight;
+            btnIniciarSesion.UseVisualStyleBackColor = true;
             btnIniciarSesion.Click += async (s, e) => await btnIniciarSesion_Click(s, e);
-            btnCancelar.Text = "Cancelar"; btnCancelar.Left = 220; btnCancelar.Top = 120;
+
+            btnCancelar.IconChar = IconChar.SignOut;
+            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconFont = IconFont.Auto;
+            btnCancelar.IconSize = 15;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleRight;
+            btnCancelar.Location = new Point(855, 217);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += (s, e) => btnCancelar_Click(s, e);
-            this.Controls.AddRange(new Control[] { lblU, txtUsuario, lblP, txtPassword, chkVerPassword, btnIniciarSesion, btnCancelar });
+
+            this.Controls.Add(pictureBox1);
+            this.Controls.Add(label2);
+            this.Controls.Add(label1);
+            this.Controls.Add(txtPassword);
+            this.Controls.Add(txtUsuario);
+            this.Controls.Add(chkVerPassword);
+            this.Controls.Add(btnIniciarSesion);
+            this.Controls.Add(btnCancelar);
+        }
+
+        private Image CrearLogo()
+        {
+            var bmp = new Bitmap(313, 286);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.FromArgb(30, 30, 50));
+                using var brush = new SolidBrush(Color.FromArgb(120, 180, 255));
+                using var font = new Font("Segoe UI", 24F, FontStyle.Bold);
+                using var font2 = new Font("Segoe UI", 12F, FontStyle.Regular);
+                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+                g.DrawString("TIENDA", font, brush, new RectangleF(0, 70, 313, 50), sf);
+                g.DrawString("VIDEOJUEGOS", font2, Brushes.White, new RectangleF(0, 125, 313, 40), sf);
+                using var pen = new Pen(Color.FromArgb(120, 180, 255), 3);
+                g.DrawRectangle(pen, 55, 190, 203, 35);
+            }
+            return bmp;
         }
 
         private void ConfiguracionFirebaseAuthClient()

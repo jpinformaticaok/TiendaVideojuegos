@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\Clientes.rdlc" />
+    <EmbeddedResource Include="Reports\Productos.rdlc" />
   </ItemGroup>
 
   <ItemGroup>

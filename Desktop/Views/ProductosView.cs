@@ -1,4 +1,5 @@
 using Desktop.Services;
+using FontAwesome.Sharp;
 using Services.Models;
 using System.Net;
 
@@ -6,29 +7,41 @@ namespace Desktop.Views
 {
     public partial class ProductosView : Form
     {
-        ProductosService productosService = new ProductosService();
-        TiposProductoService tiposService = new TiposProductoService();
-        Producto? productoModificado;
-        TabControl tabControl = new TabControl();
-        TabPage tabPageLista = new TabPage("Lista");
-        TabPage tabPageAgregarEditar = new TabPage("Agregar/Editar");
-        DataGridView dataGridProductos = new DataGridView();
-        TextBox txtBusqueda = new TextBox();
-        Button btnBuscar = new Button();
-        Button btnNuevo = new Button();
-        Button btnModificar = new Button();
-        Button btnEliminar = new Button();
-        TextBox txtNombre = new TextBox();
-        TextBox txtDescripcion = new TextBox();
-        TextBox txtPrecio = new TextBox();
-        TextBox txtStock = new TextBox();
-        TextBox txtImagenUrl = new TextBox();
-        ComboBox cmbTipo = new ComboBox();
-        TextBox txtFormato = new TextBox();
-        TextBox txtPlataforma = new TextBox();
-        Button btnGuardar = new Button();
-        Button btnCancelar = new Button();
-        PictureBox picProducto = new PictureBox();
+        private ProductosService productosService = new ProductosService();
+        private TiposProductoService tiposService = new TiposProductoService();
+        private Producto? productoModificado;
+
+        private Label label1 = new Label();
+        private TabControl tabControl = new TabControl();
+        private TabPage tabPageLista = new TabPage();
+        private TabPage tabPageAgregarEditar = new TabPage();
+        private DataGridView dataGridProductos = new DataGridView();
+        private TextBox txtBusqueda = new TextBox();
+        private Label label2 = new Label();
+        private IconButton btnBuscar = new IconButton();
+        private IconButton btnNuevo = new IconButton();
+        private IconButton btnModificar = new IconButton();
+        private IconButton btnEliminar = new IconButton();
+        private IconButton btnGuardar = new IconButton();
+        private IconButton btnCancelar = new IconButton();
+        private TextBox txtNombre = new TextBox();
+        private TextBox txtDescripcion = new TextBox();
+        private TextBox txtPrecio = new TextBox();
+        private TextBox txtStock = new TextBox();
+        private TextBox txtImagenUrl = new TextBox();
+        private ComboBox cmbTipo = new ComboBox();
+        private TextBox txtFormato = new TextBox();
+        private TextBox txtPlataforma = new TextBox();
+        private Label label3 = new Label();
+        private Label label4 = new Label();
+        private Label label5 = new Label();
+        private Label label6 = new Label();
+        private Label label7 = new Label();
+        private Label label8 = new Label();
+        private Label label9 = new Label();
+        private Label label10 = new Label();
+        private PictureBox picProducto = new PictureBox();
+        private Button btnTiposProducto = new Button();
 
         public ProductosView()
         {
@@ -40,47 +53,176 @@ namespace Desktop.Views
         private void InitializeComponent()
         {
             this.Text = "Productos";
-            this.Size = new Size(900, 600);
-            tabControl.Dock = DockStyle.Fill;
-            txtBusqueda.Left = 10; txtBusqueda.Top = 10; txtBusqueda.Width = 200;
-            btnBuscar.Text = "Buscar"; btnBuscar.Left = 220; btnBuscar.Top = 8; btnBuscar.Click += async (s, e) => await btnBuscar_Click(s, e);
-            dataGridProductos.Left = 10; dataGridProductos.Top = 40; dataGridProductos.Width = 600; dataGridProductos.Height = 400;
-            dataGridProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.ClientSize = new Size(800, 450);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Name = "ProductosView";
+
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 9);
+            label1.Text = "CRUD - Productos";
+
+            tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl.Controls.Add(tabPageLista);
+            tabControl.Controls.Add(tabPageAgregarEditar);
+            tabControl.Location = new Point(12, 59);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(776, 379);
+
+            tabPageLista.Text = "Lista";
+            tabPageLista.UseVisualStyleBackColor = true;
+
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 21);
+            label2.Text = "Buscar";
+
+            txtBusqueda.Location = new Point(54, 21);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(578, 23);
+            txtBusqueda.KeyPress += txtBusqueda_KeyPress;
+
+            btnBuscar.IconChar = IconChar.Search;
+            btnBuscar.IconColor = Color.Black;
+            btnBuscar.IconFont = IconFont.Auto;
+            btnBuscar.IconSize = 15;
+            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBuscar.Location = new Point(665, 21);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(75, 23);
+            btnBuscar.Text = "   Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += async (s, e) => await btnBuscar_Click(s, e);
+
+            dataGridProductos.AllowUserToAddRows = false;
+            dataGridProductos.AllowUserToDeleteRows = false;
+            dataGridProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridProductos.Location = new Point(6, 59);
+            dataGridProductos.Name = "dataGridProductos";
+            dataGridProductos.ReadOnly = true;
+            dataGridProductos.Size = new Size(626, 286);
             dataGridProductos.SelectionChanged += (s, e) => ShowImage();
-            picProducto.Left = 620; picProducto.Top = 40; picProducto.Width = 120; picProducto.Height = 120;
+
+            picProducto.Location = new Point(642, 59);
+            picProducto.Name = "picProducto";
+            picProducto.Size = new Size(120, 120);
             picProducto.SizeMode = PictureBoxSizeMode.Zoom;
             picProducto.BorderStyle = BorderStyle.FixedSingle;
-            btnNuevo.Text = "Nuevo"; btnNuevo.Left = 10; btnNuevo.Top = 450; btnNuevo.Click += (s, e) => btnNuevo_Click(s, e);
-            btnModificar.Text = "Modificar"; btnModificar.Left = 100; btnModificar.Top = 450; btnModificar.Click += (s, e) => btnModificar_Click(s, e);
-            btnEliminar.Text = "Eliminar"; btnEliminar.Left = 200; btnEliminar.Top = 450; btnEliminar.Click += async (s, e) => await btnEliminar_Click(s, e);
-            tabPageLista.Controls.AddRange(new Control[] { txtBusqueda, btnBuscar, dataGridProductos, picProducto, btnNuevo, btnModificar, btnEliminar });
 
-            int y = 20;
-            AddField(tabPageAgregarEditar, "Nombre", txtNombre, ref y);
-            AddField(tabPageAgregarEditar, "Descripción", txtDescripcion, ref y);
-            AddField(tabPageAgregarEditar, "Precio", txtPrecio, ref y);
-            AddField(tabPageAgregarEditar, "Stock", txtStock, ref y);
-            AddField(tabPageAgregarEditar, "Imagen URL", txtImagenUrl, ref y);
-            tabPageAgregarEditar.Controls.Add(new Label { Text = "Tipo", Left = 10, Top = y, Width = 80 });
-            cmbTipo.Left = 100; cmbTipo.Top = y; cmbTipo.Width = 200; cmbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
-            tabPageAgregarEditar.Controls.Add(cmbTipo); y += 30;
-            AddField(tabPageAgregarEditar, "Formato", txtFormato, ref y);
-            AddField(tabPageAgregarEditar, "Plataforma", txtPlataforma, ref y);
-            btnGuardar.Text = "Guardar"; btnGuardar.Left = 100; btnGuardar.Top = y; btnGuardar.Click += async (s, e) => await btnGuardar_Click(s, e);
-            btnCancelar.Text = "Cancelar"; btnCancelar.Left = 200; btnCancelar.Top = y; btnCancelar.Click += (s, e) => btnCancelar_Click(s, e);
-            tabPageAgregarEditar.Controls.AddRange(new Control[] { btnGuardar, btnCancelar });
+            btnNuevo.IconChar = IconChar.Plus;
+            btnNuevo.IconColor = Color.Black;
+            btnNuevo.IconFont = IconFont.Auto;
+            btnNuevo.IconSize = 15;
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(642, 190);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(98, 23);
+            btnNuevo.Text = " Nuevo";
+            btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += (s, e) => btnNuevo_Click(s, e);
 
-            tabControl.TabPages.Add(tabPageLista);
-            tabControl.TabPages.Add(tabPageAgregarEditar);
+            btnModificar.IconChar = IconChar.Pen;
+            btnModificar.IconColor = Color.Black;
+            btnModificar.IconFont = IconFont.Auto;
+            btnModificar.IconSize = 15;
+            btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnModificar.Location = new Point(642, 228);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(98, 23);
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += (s, e) => btnModificar_Click(s, e);
+
+            btnEliminar.IconChar = IconChar.Trash;
+            btnEliminar.IconColor = Color.Black;
+            btnEliminar.IconFont = IconFont.Auto;
+            btnEliminar.IconSize = 15;
+            btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEliminar.Location = new Point(642, 266);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(98, 23);
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += async (s, e) => await btnEliminar_Click(s, e);
+
+            btnTiposProducto.Location = new Point(642, 304);
+            btnTiposProducto.Name = "btnTiposProducto";
+            btnTiposProducto.Size = new Size(98, 23);
+            btnTiposProducto.Text = "Tipos";
+            btnTiposProducto.UseVisualStyleBackColor = true;
+            btnTiposProducto.Click += (s, e) => new TiposProductoView().ShowDialog();
+
+            tabPageLista.Controls.Add(btnTiposProducto);
+            tabPageLista.Controls.Add(btnEliminar);
+            tabPageLista.Controls.Add(btnModificar);
+            tabPageLista.Controls.Add(btnNuevo);
+            tabPageLista.Controls.Add(picProducto);
+            tabPageLista.Controls.Add(btnBuscar);
+            tabPageLista.Controls.Add(txtBusqueda);
+            tabPageLista.Controls.Add(label2);
+            tabPageLista.Controls.Add(dataGridProductos);
+
+            tabPageAgregarEditar.Text = "Agregar / Editar";
+            tabPageAgregarEditar.UseVisualStyleBackColor = true;
+
+            int y = 30;
+            label3.AutoSize = true; label3.Location = new Point(40, y); label3.Text = "Nombre";
+            txtNombre.Location = new Point(120, y - 7); txtNombre.Name = "txtNombre"; txtNombre.Size = new Size(513, 23);
+            y += 40;
+            label4.AutoSize = true; label4.Location = new Point(40, y); label4.Text = "Descripción";
+            txtDescripcion.Location = new Point(120, y - 7); txtDescripcion.Name = "txtDescripcion"; txtDescripcion.Size = new Size(513, 23);
+            y += 40;
+            label5.AutoSize = true; label5.Location = new Point(40, y); label5.Text = "Precio";
+            txtPrecio.Location = new Point(120, y - 7); txtPrecio.Name = "txtPrecio"; txtPrecio.Size = new Size(513, 23);
+            y += 40;
+            label6.AutoSize = true; label6.Location = new Point(40, y); label6.Text = "Stock";
+            txtStock.Location = new Point(120, y - 7); txtStock.Name = "txtStock"; txtStock.Size = new Size(513, 23);
+            y += 40;
+            label7.AutoSize = true; label7.Location = new Point(40, y); label7.Text = "Imagen URL";
+            txtImagenUrl.Location = new Point(120, y - 7); txtImagenUrl.Name = "txtImagenUrl"; txtImagenUrl.Size = new Size(513, 23);
+            y += 40;
+            label8.AutoSize = true; label8.Location = new Point(40, y); label8.Text = "Tipo";
+            cmbTipo.Location = new Point(120, y - 7); cmbTipo.Name = "cmbTipo"; cmbTipo.Size = new Size(513, 23); cmbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            y += 40;
+            label9.AutoSize = true; label9.Location = new Point(40, y); label9.Text = "Formato";
+            txtFormato.Location = new Point(120, y - 7); txtFormato.Name = "txtFormato"; txtFormato.Size = new Size(513, 23);
+            y += 40;
+            label10.AutoSize = true; label10.Location = new Point(40, y); label10.Text = "Plataforma";
+            txtPlataforma.Location = new Point(120, y - 7); txtPlataforma.Name = "txtPlataforma"; txtPlataforma.Size = new Size(513, 23);
+
+            btnGuardar.IconChar = IconChar.Save;
+            btnGuardar.IconColor = Color.Black;
+            btnGuardar.IconFont = IconFont.Auto;
+            btnGuardar.IconSize = 15;
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(674, 87);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += async (s, e) => await btnGuardar_Click(s, e);
+
+            btnCancelar.IconChar = IconChar.Cancel;
+            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconFont = IconFont.Auto;
+            btnCancelar.IconSize = 15;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(674, 182);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += (s, e) => btnCancelar_Click(s, e);
+
+            tabPageAgregarEditar.Controls.AddRange(new Control[]
+            {
+                label3, txtNombre, label4, txtDescripcion, label5, txtPrecio, label6, txtStock,
+                label7, txtImagenUrl, label8, cmbTipo, label9, txtFormato, label10, txtPlataforma,
+                btnGuardar, btnCancelar
+            });
+
             this.Controls.Add(tabControl);
-        }
-
-        private void AddField(TabPage page, string label, TextBox txt, ref int y)
-        {
-            page.Controls.Add(new Label { Text = label, Left = 10, Top = y, Width = 80 });
-            txt.Left = 100; txt.Top = y; txt.Width = 200;
-            page.Controls.Add(txt);
-            y += 30;
+            this.Controls.Add(label1);
         }
 
         private async void LoadProductos()
@@ -142,6 +284,7 @@ namespace Desktop.Views
                 producto.Created_at = productoModificado.Created_at;
                 ok = await productosService.UpdateProductoAsync(producto);
             }
+
             if (ok)
             {
                 MessageBox.Show("Producto guardado correctamente");
@@ -154,8 +297,13 @@ namespace Desktop.Views
 
         private void ClearFields()
         {
-            txtNombre.Clear(); txtDescripcion.Clear(); txtPrecio.Clear(); txtStock.Clear();
-            txtImagenUrl.Clear(); txtFormato.Clear(); txtPlataforma.Clear();
+            txtNombre.Clear();
+            txtDescripcion.Clear();
+            txtPrecio.Clear();
+            txtStock.Clear();
+            txtImagenUrl.Clear();
+            txtFormato.Clear();
+            txtPlataforma.Clear();
         }
 
         private void btnModificar_Click(object? s, EventArgs e)
@@ -180,11 +328,15 @@ namespace Desktop.Views
             if (dataGridProductos.CurrentRow != null)
             {
                 var p = (Producto)dataGridProductos.CurrentRow.DataBoundItem;
-                var confirm = MessageBox.Show($"¿Eliminar producto {p.Name}?", "Confirmar", MessageBoxButtons.YesNo);
+                var confirm = MessageBox.Show($"¿Está seguro de eliminar el producto {p.Name}?", "Confirmar eliminación", MessageBoxButtons.YesNo);
                 if (confirm == DialogResult.Yes)
                 {
                     bool ok = await productosService.DeleteProductoAsync(p.Id);
-                    if (ok) { MessageBox.Show("Eliminado"); LoadProductos(); }
+                    if (ok)
+                    {
+                        MessageBox.Show("Producto eliminado");
+                        LoadProductos();
+                    }
                 }
             }
         }
@@ -206,6 +358,15 @@ namespace Desktop.Views
                     catch { picProducto.Image = null; }
                 }
                 else picProducto.Image = null;
+            }
+        }
+
+        private void txtBusqueda_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnBuscar.PerformClick();
+                e.Handled = true;
             }
         }
     }
