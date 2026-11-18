@@ -51,10 +51,15 @@ namespace Desktop.Services
         {
             try
             {
-                // generar numero
+                // generar numero correlativo FAC-00001, FAC-00002, ...
                 var existing = await GetAllAsync();
-                int next = (existing?.Count ?? 0) + 1;
-                venta.Number = $"FAC-{next:D5}";
+                int ultimo = 0;
+                foreach (var v in existing ?? new List<Venta>())
+                {
+                    if (int.TryParse(v.Number?.Replace("FAC-", string.Empty), out var n) && n > ultimo)
+                        ultimo = n;
+                }
+                venta.Number = $"FAC-{ultimo + 1:D5}";
                 venta.Date = DateTimeOffset.UtcNow;
 
                 decimal total = 0;

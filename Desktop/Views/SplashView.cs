@@ -84,9 +84,17 @@ namespace Desktop.Views
             if (dataReady && printReady)
             {
                 timer1.Enabled = false;
+                pbSplash.Value = 100;
                 this.Visible = false;
-                var menuPrincipal = new MenuPrincipalView();
-                menuPrincipal.ShowDialog();
+
+                // Después del splash se muestra la pantalla de inicio de sesión.
+                var login = new IniciarSesionView();
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+                    var menuPrincipal = new MenuPrincipalView();
+                    menuPrincipal.ShowDialog();
+                }
+
                 this.Close();
             }
         }

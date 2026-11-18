@@ -29,5 +29,10 @@ namespace Services.Models
         [Browsable(false)]
         [JsonPropertyName("is_deleted")]
         public bool isDeleted { get; set; } = false;
+
+        public override string ToString()
+        {
+            return $"{Firstname} {Lastname}".Trim();
+        }
     }
 }

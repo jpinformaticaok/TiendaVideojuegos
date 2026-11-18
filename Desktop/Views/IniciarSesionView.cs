@@ -23,7 +23,7 @@ namespace Desktop.Views
         public IniciarSesionView()
         {
             InitializeComponent();
-            Env.Load("../../../");
+            EnvConfig.Cargar();
             authDomain = Environment.GetEnvironmentVariable("AUTHDOMAINFB");
             apiKey = Environment.GetEnvironmentVariable("APIKEYFIREBASE");
             ConfiguracionFirebaseAuthClient();
@@ -60,16 +60,19 @@ namespace Desktop.Views
             txtUsuario.Location = new Point(452, 59);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(478, 23);
+            txtUsuario.TabIndex = 0;
 
             txtPassword.Location = new Point(452, 107);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(478, 23);
+            txtPassword.TabIndex = 1;
 
             chkVerPassword.AutoSize = true;
             chkVerPassword.Location = new Point(452, 171);
             chkVerPassword.Name = "chkVerPassword";
             chkVerPassword.Size = new Size(105, 19);
+            chkVerPassword.TabIndex = 2;
             chkVerPassword.Text = "Ver Contraseña";
             chkVerPassword.UseVisualStyleBackColor = true;
             chkVerPassword.CheckedChanged += chkVerPassword_CheckedChanged;
@@ -82,6 +85,7 @@ namespace Desktop.Views
             btnIniciarSesion.Location = new Point(472, 217);
             btnIniciarSesion.Name = "btnIniciarSesion";
             btnIniciarSesion.Size = new Size(97, 23);
+            btnIniciarSesion.TabIndex = 3;
             btnIniciarSesion.Text = "Iniciar Sesión";
             btnIniciarSesion.TextAlign = ContentAlignment.MiddleRight;
             btnIniciarSesion.UseVisualStyleBackColor = true;
@@ -95,6 +99,7 @@ namespace Desktop.Views
             btnCancelar.Location = new Point(855, 217);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleLeft;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -108,6 +113,10 @@ namespace Desktop.Views
             this.Controls.Add(chkVerPassword);
             this.Controls.Add(btnIniciarSesion);
             this.Controls.Add(btnCancelar);
+
+            this.AcceptButton = btnIniciarSesion;
+            this.CancelButton = btnCancelar;
+            this.ActiveControl = txtUsuario;
         }
 
         private Image CrearLogo()
@@ -130,6 +139,9 @@ namespace Desktop.Views
 
         private void ConfiguracionFirebaseAuthClient()
         {
+            if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(authDomain))
+                return;
+
             var config = new FirebaseAuthConfig
             {
                 ApiKey = apiKey,
@@ -141,33 +153,55 @@ namespace Desktop.Views
 
         private async Task btnIniciarSesion_Click(object? sender, EventArgs e)
         {
-            intentos++;
+            if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Ingrese su usuario y contraseña.", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (firebaseAuthClient == null)
+            {
+                MessageBox.Show("La configuración de Firebase no está disponible. Verifique el archivo .env.", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            btnIniciarSesion.Enabled = false;
             try
             {
-                var user = await firebaseAuthClient!.SignInWithEmailAndPasswordAsync(txtUsuario.Text, txtPassword.Text);
+                var user = await firebaseAuthClient.SignInWithEmailAndPasswordAsync(txtUsuario.Text.Trim(), txtPassword.Text);
                 if (user == null)
                 {
-                    MessageBox.Show("Usuario o contraseña incorrectos.");
+                    MessageBox.Show("Usuario o contraseña incorrectos.", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                MessageBox.Show($"Bienvenido, {txtUsuario.Text}!");
-                this.Hide();
-                var mainView = new MenuPrincipalView();
-                mainView.Show();
+
+                MessageBox.Show($"Bienvenido, {txtUsuario.Text}!", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (FirebaseAuthException ex)
             {
-                MessageBox.Show($"Error al iniciar sesión: {ex.Reason}");
+                intentos++;
+                MessageBox.Show($"Error al iniciar sesión: {ex.Reason}", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Clear();
+                txtPassword.Focus();
+
+                if (intentos >= 3)
+                {
+                    MessageBox.Show("Has alcanzado el número máximo de intentos. La aplicación se cerrará.", "Iniciar Sesión", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
             }
-            if (intentos >= 3)
+            finally
             {
-                MessageBox.Show("Has alcanzado el número máximo de intentos. La aplicación se cerrará.");
-                Application.Exit();
+                btnIniciarSesion.Enabled = true;
             }
         }
 
         private void btnCancelar_Click(object? sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

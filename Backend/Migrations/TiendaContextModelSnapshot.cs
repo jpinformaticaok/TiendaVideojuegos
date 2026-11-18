@@ -86,7 +86,7 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Address = "Calle Falsa 123",
-                            Created_at = new DateTimeOffset(new DateTime(2026, 11, 17, 18, 6, 52, 558, DateTimeKind.Unspecified).AddTicks(2851), new TimeSpan(0, 0, 0, 0, 0)),
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Dni = "29720301",
                             Firstname = "Juan Pablo",
                             Lastname = "Aguero",
@@ -97,7 +97,7 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             Address = "Avenida Siempre Viva 456",
-                            Created_at = new DateTimeOffset(new DateTime(2026, 11, 17, 18, 6, 52, 558, DateTimeKind.Unspecified).AddTicks(2854), new TimeSpan(0, 0, 0, 0, 0)),
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Dni = "87654321",
                             Firstname = "María",
                             Lastname = "González",
@@ -108,7 +108,7 @@ namespace Backend.Migrations
                         {
                             Id = 3,
                             Address = "Callejón del Beso 789",
-                            Created_at = new DateTimeOffset(new DateTime(2026, 11, 17, 18, 6, 52, 558, DateTimeKind.Unspecified).AddTicks(2857), new TimeSpan(0, 0, 0, 0, 0)),
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Dni = "11223344",
                             Firstname = "Pedro",
                             Lastname = "López",
@@ -162,6 +162,71 @@ namespace Backend.Migrations
                         .HasDatabaseName("ix_detalles_venta_venta_id");
 
                     b.ToTable("detalles_venta", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProductoId = 1,
+                            Quantity = 1,
+                            Subtotal = 1250000m,
+                            UnitPrice = 1250000m,
+                            VentaId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProductoId = 4,
+                            Quantity = 1,
+                            Subtotal = 95000m,
+                            UnitPrice = 95000m,
+                            VentaId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProductoId = 2,
+                            Quantity = 1,
+                            Subtotal = 1150000m,
+                            UnitPrice = 1150000m,
+                            VentaId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ProductoId = 5,
+                            Quantity = 1,
+                            Subtotal = 105000m,
+                            UnitPrice = 105000m,
+                            VentaId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ProductoId = 3,
+                            Quantity = 1,
+                            Subtotal = 780000m,
+                            UnitPrice = 780000m,
+                            VentaId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ProductoId = 6,
+                            Quantity = 1,
+                            Subtotal = 88000m,
+                            UnitPrice = 88000m,
+                            VentaId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ProductoId = 8,
+                            Quantity = 1,
+                            Subtotal = 45000m,
+                            UnitPrice = 45000m,
+                            VentaId = 3
+                        });
                 });
 
             modelBuilder.Entity("Services.Models.Localidad", b =>
@@ -357,6 +422,148 @@ namespace Backend.Migrations
                         .HasDatabaseName("ix_productos_tipo_producto_id");
 
                     b.ToTable("productos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Consola PlayStation 5 Slim 1TB",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/ps5.png",
+                            Name = "PlayStation 5 Slim",
+                            Platform = "PlayStation",
+                            Price = 1250000m,
+                            Stock = 8,
+                            TipoProductoId = 1,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Consola Xbox Series X 1TB",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/xbox.png",
+                            Name = "Xbox Series X",
+                            Platform = "Xbox",
+                            Price = 1150000m,
+                            Stock = 6,
+                            TipoProductoId = 1,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Consola Nintendo Switch OLED 64GB",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/switch.png",
+                            Name = "Nintendo Switch OLED",
+                            Platform = "Nintendo",
+                            Price = 780000m,
+                            Stock = 10,
+                            TipoProductoId = 1,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Juego de fútbol para PlayStation 5",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/fc25.png",
+                            Name = "EA Sports FC 25",
+                            Platform = "PlayStation",
+                            Price = 95000m,
+                            Stock = 25,
+                            TipoProductoId = 2,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Shooter para Xbox Series X",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/cod.png",
+                            Name = "Call of Duty: Black Ops 6",
+                            Platform = "Xbox",
+                            Price = 105000m,
+                            Stock = 20,
+                            TipoProductoId = 2,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Aventura para Nintendo Switch",
+                            Format = "Físico",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/zelda.png",
+                            Name = "Zelda: Tears of the Kingdom",
+                            Platform = "Nintendo",
+                            Price = 88000m,
+                            Stock = 15,
+                            TipoProductoId = 2,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Juego digital para PC",
+                            Format = "Digital",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/minecraft.png",
+                            Name = "Minecraft Java Edition",
+                            Platform = "PC",
+                            Price = 25000m,
+                            Stock = 999,
+                            TipoProductoId = 2,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Suscripción PlayStation Plus 3 meses",
+                            Format = "Digital",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/psplus.png",
+                            Name = "PlayStation Plus Essential",
+                            Platform = "PlayStation",
+                            Price = 45000m,
+                            Stock = 100,
+                            TipoProductoId = 3,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Suscripción Game Pass Ultimate 1 mes",
+                            Format = "Digital",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/gamepass.png",
+                            Name = "Xbox Game Pass Ultimate",
+                            Platform = "Xbox",
+                            Price = 30000m,
+                            Stock = 100,
+                            TipoProductoId = 3,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "Suscripción Switch Online 12 meses",
+                            Format = "Digital",
+                            ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/nso.png",
+                            Name = "Nintendo Switch Online",
+                            Platform = "Nintendo",
+                            Price = 35000m,
+                            Stock = 100,
+                            TipoProductoId = 3,
+                            isDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Services.Models.Provincia", b =>
@@ -509,6 +716,35 @@ namespace Backend.Migrations
                         .HasDatabaseName("ix_ventas_cliente_id");
 
                     b.ToTable("ventas", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClienteId = 1,
+                            Date = new DateTimeOffset(new DateTime(2026, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = "FAC-00001",
+                            Total = 1345000m,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClienteId = 2,
+                            Date = new DateTimeOffset(new DateTime(2026, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = "FAC-00002",
+                            Total = 1255000m,
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClienteId = 3,
+                            Date = new DateTimeOffset(new DateTime(2026, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = "FAC-00003",
+                            Total = 913000m,
+                            isDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Services.Models.Cliente", b =>

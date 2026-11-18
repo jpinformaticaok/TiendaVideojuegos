@@ -1,5 +1,4 @@
 using Desktop.Views;
-using DotNetEnv;
 using Services;
 
 namespace Desktop
@@ -9,7 +8,7 @@ namespace Desktop
         [STAThread]
         static void Main()
         {
-            Env.Load("..//..//..//");
+            EnvConfig.Cargar();
             Globales.ApiUrl = Environment.GetEnvironmentVariable("URLAPI");
 
             ApplicationConfiguration.Initialize();

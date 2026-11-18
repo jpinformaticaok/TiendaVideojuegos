@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update=".env" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Reports\Clientes.rdlc" />
     <EmbeddedResource Include="Reports\Productos.rdlc" />
   </ItemGroup>

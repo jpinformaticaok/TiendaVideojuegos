@@ -30,6 +30,7 @@ namespace Desktop.Views
         private TextBox txtStock = new TextBox();
         private TextBox txtImagenUrl = new TextBox();
         private ComboBox cmbTipo = new ComboBox();
+        private List<TipoProducto> tipos = new List<TipoProducto>();
         private TextBox txtFormato = new TextBox();
         private TextBox txtPlataforma = new TextBox();
         private Label label3 = new Label();
@@ -228,16 +229,28 @@ namespace Desktop.Views
         private async void LoadProductos()
         {
             var productos = await productosService.GetAllAsync();
-            if (productos != null) dataGridProductos.DataSource = productos;
+            if (productos != null)
+            {
+                dataGridProductos.DataSource = productos;
+                AjustarColumnas();
+            }
+        }
+
+        private void AjustarColumnas()
+        {
+            // La imagen se muestra en el PictureBox, no hace falta la URL ni la navegación en la grilla
+            foreach (var columna in new[] { "ImageUrl", "TipoProducto", "TipoProductoId", "isDeleted" })
+                if (dataGridProductos.Columns.Contains(columna))
+                    dataGridProductos.Columns[columna].Visible = false;
         }
 
         private async void LoadTipos()
         {
-            var tipos = await tiposService.GetAllAsync();
-            if (tipos != null)
+            var tiposDb = await tiposService.GetAllAsync();
+            if (tiposDb != null)
             {
-                cmbTipo.DisplayMember = "Name";
-                cmbTipo.ValueMember = "Id";
+                tipos = tiposDb;
+                cmbTipo.DataSource = null;
                 cmbTipo.DataSource = tipos;
             }
         }
@@ -245,7 +258,11 @@ namespace Desktop.Views
         private async Task btnBuscar_Click(object? s, EventArgs e)
         {
             var productos = await productosService.GetAllWithFilterAsync(txtBusqueda.Text);
-            if (productos != null) dataGridProductos.DataSource = productos;
+            if (productos != null)
+            {
+                dataGridProductos.DataSource = productos;
+                AjustarColumnas();
+            }
         }
 
         private void btnNuevo_Click(object? s, EventArgs e)
@@ -271,7 +288,7 @@ namespace Desktop.Views
                 Price = decimal.TryParse(txtPrecio.Text, out var p) ? p : 0,
                 Stock = int.TryParse(txtStock.Text, out var st) ? st : 0,
                 ImageUrl = txtImagenUrl.Text,
-                TipoProductoId = (int)(cmbTipo.SelectedValue ?? 0),
+                TipoProductoId = cmbTipo.SelectedItem is TipoProducto tipo ? tipo.Id : 0,
                 Format = txtFormato.Text,
                 Platform = txtPlataforma.Text,
             };
@@ -318,7 +335,8 @@ namespace Desktop.Views
                 txtImagenUrl.Text = productoModificado.ImageUrl;
                 txtFormato.Text = productoModificado.Format;
                 txtPlataforma.Text = productoModificado.Platform;
-                if (productoModificado.TipoProductoId != 0) cmbTipo.SelectedValue = productoModificado.TipoProductoId;
+                var tipo = tipos.FirstOrDefault(t => t.Id == productoModificado.TipoProductoId);
+                if (tipo != null) cmbTipo.SelectedItem = tipo;
                 tabControl.SelectedTab = tabPageAgregarEditar;
             }
         }

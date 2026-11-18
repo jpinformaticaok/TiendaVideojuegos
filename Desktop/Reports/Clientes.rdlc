@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <Body>
-    <ReportItems>
-      <Textbox Name="Textbox1">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Reporte de Clientes</Value>
-              </TextRun>
-            </TextRuns>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0in</Top>
-        <Left>0in</Left>
-        <Height>0.25in</Height>
-        <Width>2in</Width>
-      </Textbox>
-    </ReportItems>
-    <Height>1in</Height>
-  </Body>
-  <Width>6.5in</Width>
   <DataSources>
     <DataSource Name="DSClientes">
       <ConnectionProperties>
@@ -36,9 +12,12 @@
   <DataSets>
     <DataSet Name="DSClientes">
       <Fields>
-        <Field Name="Id"><DataField>Id</DataField><rd:TypeName>System.Int32</rd:TypeName></Field>
+        <Field Name="id"><DataField>id</DataField><rd:TypeName>System.String</rd:TypeName></Field>
         <Field Name="Firstname"><DataField>Firstname</DataField><rd:TypeName>System.String</rd:TypeName></Field>
         <Field Name="Lastname"><DataField>Lastname</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Dni"><DataField>Dni</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Address"><DataField>Address</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Localidad"><DataField>Localidad</DataField><rd:TypeName>System.String</rd:TypeName></Field>
       </Fields>
       <Query>
         <DataSourceName>DSClientes</DataSourceName>
@@ -46,4 +25,280 @@
       </Query>
     </DataSet>
   </DataSets>
+  <Body>
+    <ReportItems>
+      <Textbox Name="TituloClientes">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Reporte de Clientes</Value>
+                <Style>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TituloClientes</rd:DefaultName>
+        <Top>0in</Top>
+        <Left>0in</Left>
+        <Height>0.35in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Tablix Name="TablaClientes">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>0.5in</Width></TablixColumn>
+            <TablixColumn><Width>1.4in</Width></TablixColumn>
+            <TablixColumn><Width>1.4in</Width></TablixColumn>
+            <TablixColumn><Width>1in</Width></TablixColumn>
+            <TablixColumn><Width>2in</Width></TablixColumn>
+            <TablixColumn><Width>1.2in</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.3in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cId">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>ID</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cId</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cNombre">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Nombres</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cNombre</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cApellido">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Apellidos</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cApellido</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cDni">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>DNI</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cDni</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cDireccion">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Direccion</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cDireccion</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cLocalidad">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Localidad</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cLocalidad</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vId">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!id.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vId</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vNombre">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Firstname.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vNombre</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vApellido">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Lastname.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vApellido</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vDni">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Dni.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vDni</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vDireccion">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Address.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vDireccion</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vLocalidad">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Localidad.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vLocalidad</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="DetalleClientes">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!id.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DSClientes</DataSetName>
+        <Top>0.45in</Top>
+        <Left>0in</Left>
+        <Height>0.55in</Height>
+        <Width>7.5in</Width>
+      </Tablix>
+    </ReportItems>
+    <Height>7.5in</Height>
+  </Body>
+  <Width>7.5in</Width>
+  <Page>
+    <PageHeight>11in</PageHeight>
+    <PageWidth>8.5in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
+  </Page>
 </Report>
