@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "Backend/**"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 jobs:
@@ -25,38 +26,47 @@ jobs:
         run: dotnet build Backend/Backend.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish Backend/Backend.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Backend/Backend.csproj -c Release -o ${{ runner.temp }}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ runner.temp }}/myapp
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     permissions:
       contents: read
+      id-token: write
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
+          path: app
 
-      - name: Diagnostico del publish profile
-        run: |
-          P="${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}"
-          echo "largo=${#P}"
-          echo "prefijo=${P:0:15}"
-          echo "perfiles=$(echo "$P" | grep -c '<publishProfile')"
-          echo "tiene_zip=$(echo "$P" | grep -c 'ZipDeploy')"
-          echo "bytes_raros=$(echo "$P" | tr -d '\n' | wc -c)"
+      - name: Login to Azure (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'api-tiendavideojuegos-jp'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+        run: |
+          cd app
+          zip -r ../app.zip . > /dev/null
+          cd ..
+          az webapp deploy \
+            --resource-group tiendavideojuegos-rg \
+            --name api-tiendavideojuegos-jp \
+            --src-path app.zip \
+            --type zip \
+            --async false
+
+      - name: Logout of Azure
+        if: always()
+        run: az logout
