@@ -45,6 +45,15 @@ jobs:
         with:
           name: .net-app
 
+      - name: Diagnostico del publish profile
+        run: |
+          P="${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}"
+          echo "largo=${#P}"
+          echo "prefijo=${P:0:15}"
+          echo "perfiles=$(echo "$P" | grep -c '<publishProfile')"
+          echo "tiene_zip=$(echo "$P" | grep -c 'ZipDeploy')"
+          echo "bytes_raros=$(echo "$P" | tr -d '\n' | wc -c)"
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
