@@ -92,4 +92,14 @@ Abrir `TiendaVideojuegos.sln` en Visual Studio 2022 y ejecutar el proyecto **Des
 
 ## Despliegue
 
-El workflow `.github/workflows/deploy.yml` compila y publica el backend en Azure Web App usando el secret `AZURE_WEBAPP_PUBLISH_PROFILE`.
+El workflow `.github/workflows/deploy.yml` compila el backend y lo publica en Azure Web App
+(`api-tiendavideojuegos-jp`) usando **OpenID Connect** (sin publish profile):
+
+1. `azure/login@v2` inicia sesión con la identidad federada del repositorio
+   (secrets `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`).
+2. `az webapp deploy --type zip` sube el paquete publicado.
+
+La credencial federada se creó sobre la app registration `gh-tiendavideojuegos-deploy`
+con el subject `repo:jpinformaticaok/TiendaVideojuegos:ref:refs/heads/main` y su variante
+con IDs inmutables, y el service principal tiene el rol *Website Contributor* sobre el
+resource group `tiendavideojuegos-rg`.
