@@ -8,7 +8,8 @@ Sistema de gestión para una tienda de videojuegos (consolas, juegos digitales/f
 - **Backend** (`net9.0`): ASP.NET Core Web API + EF Core 8 + Npgsql (Supabase PostgreSQL). Controladores CRUD con borrado lógico (`isDeleted`) y endpoints `deleteds`/`restore`.
 - **Desktop** (`net9.0-windows`): WinForms con:
   - `SplashView` (barra de progreso + carga de datos + reporte) y luego `IniciarSesionView`.
-  - `IniciarSesionView` (Firebase Authentication email/password).
+  - `IniciarSesionView` (Firebase Authentication email/password) con botón **Crear Usuario**.
+  - `RegistrarUsuarioView` (alta de usuario en Firebase con email y contraseña).
   - `MenuPrincipalView` MDI con `MenuStrip` + `FontAwesome.Sharp.IconMenuItem`.
   - Vistas CRUD con `TabControl`, `DataGridView`, `FontAwesome.Sharp.IconButton`.
   - Reportes con `ReportViewerCore.WinForms` (`ViewReports`).
@@ -22,6 +23,10 @@ SplashView  →  IniciarSesionView  →  MenuPrincipalView
 
 El splash verifica la conexión y prepara el reporte; al terminar abre el login.
 Si el login es correcto se abre el menú principal (MDI); si se cancela, la aplicación se cierra.
+
+Desde el login, el botón **Crear Usuario** abre `RegistrarUsuarioView`, que registra la cuenta en
+Firebase (Email/Password), valida email, mínimo de 6 caracteres y repetición de contraseña, y al
+finalizar deja el email cargado en el login para ingresar la contraseña.
 
 ## Datos de prueba (semilla)
 
@@ -45,6 +50,19 @@ Usuario de prueba de Firebase (Email/Password):
 Usuario:    test@tienda.com
 Contraseña: Tienda1234
 ```
+
+También se pueden crear usuarios nuevos desde el botón **Crear Usuario** del login; quedan
+registrados en el proyecto de Firebase y pueden iniciar sesión inmediatamente.
+
+## Endpoints utilizados
+
+| Servicio | Endpoint |
+| --- | --- |
+| Firebase Auth (login) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEYFIREBASE` |
+| Firebase Auth (alta) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEYFIREBASE` |
+| Backend (splash y API) | `https://api-tiendavideojuegos-jp.azurewebsites.net/api/` |
+| Supabase REST | `https://sukjueyvigrcyafzppjx.supabase.co/rest/v1/` (`clientes`, `localidades`, `provincias`, `paises`, `productos`, `tipos_producto`, `ventas`, `detalles_venta`) |
+| Supabase Storage | `https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/` |
 
 ## Requisitos
 

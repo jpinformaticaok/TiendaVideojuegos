@@ -17,6 +17,7 @@ namespace Desktop.Views
         private TextBox txtPassword = new TextBox();
         private CheckBox chkVerPassword = new CheckBox();
         private IconButton btnIniciarSesion = new IconButton();
+        private IconButton btnCrearUsuario = new IconButton();
         private IconButton btnCancelar = new IconButton();
         private PictureBox pictureBox1 = new PictureBox();
 
@@ -91,15 +92,29 @@ namespace Desktop.Views
             btnIniciarSesion.UseVisualStyleBackColor = true;
             btnIniciarSesion.Click += async (s, e) => await btnIniciarSesion_Click(s, e);
 
+            btnCrearUsuario.IconChar = IconChar.UserPlus;
+            btnCrearUsuario.IconColor = Color.Black;
+            btnCrearUsuario.IconFont = IconFont.Auto;
+            btnCrearUsuario.IconSize = 15;
+            btnCrearUsuario.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCrearUsuario.Location = new Point(584, 217);
+            btnCrearUsuario.Name = "btnCrearUsuario";
+            btnCrearUsuario.Size = new Size(130, 23);
+            btnCrearUsuario.TabIndex = 4;
+            btnCrearUsuario.Text = "Crear Usuario";
+            btnCrearUsuario.TextAlign = ContentAlignment.MiddleRight;
+            btnCrearUsuario.UseVisualStyleBackColor = true;
+            btnCrearUsuario.Click += (s, e) => btnCrearUsuario_Click(s, e);
+
             btnCancelar.IconChar = IconChar.SignOut;
             btnCancelar.IconColor = Color.Black;
             btnCancelar.IconFont = IconFont.Auto;
             btnCancelar.IconSize = 15;
             btnCancelar.ImageAlign = ContentAlignment.MiddleRight;
-            btnCancelar.Location = new Point(855, 217);
+            btnCancelar.Location = new Point(730, 217);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 4;
+            btnCancelar.Size = new Size(90, 23);
+            btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleLeft;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -112,6 +127,7 @@ namespace Desktop.Views
             this.Controls.Add(txtUsuario);
             this.Controls.Add(chkVerPassword);
             this.Controls.Add(btnIniciarSesion);
+            this.Controls.Add(btnCrearUsuario);
             this.Controls.Add(btnCancelar);
 
             this.AcceptButton = btnIniciarSesion;
@@ -196,6 +212,17 @@ namespace Desktop.Views
             finally
             {
                 btnIniciarSesion.Enabled = true;
+            }
+        }
+
+        private void btnCrearUsuario_Click(object? sender, EventArgs e)
+        {
+            using var registro = new RegistrarUsuarioView();
+            if (registro.ShowDialog(this) == DialogResult.OK)
+            {
+                txtUsuario.Text = registro.EmailCreado;
+                txtPassword.Clear();
+                txtPassword.Focus();
             }
         }
 
