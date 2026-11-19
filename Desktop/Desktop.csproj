@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -27,6 +27,39 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ClientesView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\ClientesView.Designer.cs"><DependentUpon>ClientesView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\ClientesView.resx"><DependentUpon>ClientesView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\IniciarSesionView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\IniciarSesionView.Designer.cs"><DependentUpon>IniciarSesionView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\IniciarSesionView.resx"><DependentUpon>IniciarSesionView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\MenuPrincipalView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\MenuPrincipalView.Designer.cs"><DependentUpon>MenuPrincipalView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\MenuPrincipalView.resx"><DependentUpon>MenuPrincipalView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\ProductosView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\ProductosView.Designer.cs"><DependentUpon>ProductosView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\ProductosView.resx"><DependentUpon>ProductosView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\RegistrarUsuarioView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\RegistrarUsuarioView.Designer.cs"><DependentUpon>RegistrarUsuarioView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\RegistrarUsuarioView.resx"><DependentUpon>RegistrarUsuarioView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\SplashView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\SplashView.Designer.cs"><DependentUpon>SplashView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\SplashView.resx"><DependentUpon>SplashView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\TiposProductoView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\TiposProductoView.Designer.cs"><DependentUpon>TiposProductoView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\TiposProductoView.resx"><DependentUpon>TiposProductoView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\VentasView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\VentasView.Designer.cs"><DependentUpon>VentasView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\VentasView.resx"><DependentUpon>VentasView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="ViewReports\ClientesViewReport.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="ViewReports\ClientesViewReport.Designer.cs"><DependentUpon>ClientesViewReport.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="ViewReports\ClientesViewReport.resx"><DependentUpon>ClientesViewReport.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="ViewReports\ProductosViewReport.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="ViewReports\ProductosViewReport.Designer.cs"><DependentUpon>ProductosViewReport.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="ViewReports\ProductosViewReport.resx"><DependentUpon>ProductosViewReport.cs</DependentUpon></EmbeddedResource>
   </ItemGroup>
 
 </Project>

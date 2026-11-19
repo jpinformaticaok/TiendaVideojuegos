@@ -12,6 +12,7 @@ Sistema de gestión para una tienda de videojuegos (consolas, juegos digitales/f
   - `RegistrarUsuarioView` (alta de usuario en Firebase con email y contraseña).
   - `MenuPrincipalView` MDI con `MenuStrip` + `FontAwesome.Sharp.IconMenuItem`.
   - Vistas CRUD con `TabControl`, `DataGridView`, `FontAwesome.Sharp.IconButton`.
+  - Formularios editables en el **Diseñador de Visual Studio 2022** (cada uno con su `.Designer.cs` y `.resx`).
   - Reportes con `ReportViewerCore.WinForms` (`ViewReports`).
   - Imágenes pequeñas de productos (`PictureBox`) desde Supabase Storage.
 
@@ -27,6 +28,34 @@ Si el login es correcto se abre el menú principal (MDI); si se cancela, la apli
 Desde el login, el botón **Crear Usuario** abre `RegistrarUsuarioView`, que registra la cuenta en
 Firebase (Email/Password), valida email, mínimo de 6 caracteres y repetición de contraseña, y al
 finalizar deja el email cargado en el login para ingresar la contraseña.
+
+## Trabajar con el Diseñador de Visual Studio
+
+Los 10 formularios siguen la estructura estándar de WinForms, por lo que se pueden abrir y
+editar visualmente en Visual Studio 2022:
+
+| Formulario | Archivos |
+| --- | --- |
+| `SplashView` | `Desktop/Views/SplashView.cs` + `.Designer.cs` + `.resx` |
+| `IniciarSesionView` | `Desktop/Views/IniciarSesionView.cs` + `.Designer.cs` + `.resx` |
+| `RegistrarUsuarioView` | `Desktop/Views/RegistrarUsuarioView.cs` + `.Designer.cs` + `.resx` |
+| `MenuPrincipalView` | `Desktop/Views/MenuPrincipalView.cs` + `.Designer.cs` + `.resx` |
+| `ClientesView` | `Desktop/Views/ClientesView.cs` + `.Designer.cs` + `.resx` |
+| `TiposProductoView` | `Desktop/Views/TiposProductoView.cs` + `.Designer.cs` + `.resx` |
+| `ProductosView` | `Desktop/Views/ProductosView.cs` + `.Designer.cs` + `.resx` |
+| `VentasView` | `Desktop/Views/VentasView.cs` + `.Designer.cs` + `.resx` |
+| `ClientesViewReport` | `Desktop/ViewReports/ClientesViewReport.cs` + `.Designer.cs` + `.resx` |
+| `ProductosViewReport` | `Desktop/ViewReports/ProductosViewReport.cs` + `.Designer.cs` + `.resx` |
+
+- Para abrir el diseñador: clic derecho sobre el `.cs` → **Ver diseñador** (o `Shift+F7`).
+- El `.Designer.cs` contiene `InitializeComponent()` y las declaraciones de los controles: se edita
+  desde el diseñador, no a mano. La lógica queda en el `.cs`.
+- Los logos del splash y del login se dibujan en tiempo de ejecución (`CrearImagenSplash` /
+  `CrearLogo`), así que en el diseñador esos `PictureBox` aparecen vacíos. Los datos de las grillas,
+  las imágenes de productos y los reportes también se cargan en tiempo de ejecución.
+- Los controles `IconButton`/`IconMenuItem` (FontAwesome.Sharp) y `ReportViewer`
+  (ReportViewerCore.WinForms) vienen de NuGet: hay que restaurar los paquetes antes de abrir el
+  diseñador.
 
 ## Datos de prueba (semilla)
 

@@ -9,55 +9,14 @@ namespace Desktop.Views
         bool dataReady = false;
         bool printReady = false;
 
-        private Label label1 = new Label();
-        private PictureBox pictureBox1 = new PictureBox();
-        private ProgressBar pbSplash = new ProgressBar();
-        private System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
 
         public SplashView()
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            this.Text = "SplashView";
-            this.ClientSize = new Size(800, 450);
-            this.BackColor = SystemColors.ActiveCaption;
-            this.ControlBox = false;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Name = "SplashView";
-
-            label1.AutoSize = true;
-            label1.Font = new Font("Rockwell", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 109);
-            label1.Name = "label1";
-            label1.Size = new Size(414, 59);
-            label1.Text = "Tienda Videojuegos";
-
             pictureBox1.Image = CrearImagenSplash();
-            pictureBox1.Location = new Point(321, 90);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(478, 331);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabStop = false;
-
-            pbSplash.Location = new Point(12, 369);
-            pbSplash.Name = "pbSplash";
-            pbSplash.Size = new Size(488, 52);
-            pbSplash.Step = 20;
-
-            timer1.Interval = 1000;
-            timer1.Tick += timer1_Tick;
-
-            this.Controls.Add(pbSplash);
-            this.Controls.Add(label1);
-            this.Controls.Add(pictureBox1);
-            this.Activated += SplashView_Activated;
         }
+
+        
 
         private Image CrearImagenSplash()
         {
