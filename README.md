@@ -4,7 +4,7 @@ Sistema de gestión para una tienda de videojuegos (consolas, juegos digitales/f
 
 ## Proyectos
 
-- **Services** (`net9.0`): modelos compartidos (`Cliente`, `Localidad`, `Provincia`, `Pais`, `TipoProducto`, `Producto`, `Venta`, `DetalleVenta`).
+- **Services** (`net9.0`): modelos compartidos (`Cliente`, `TipoProducto`, `Producto`, `Venta`, `DetalleVenta`). La ubicación del cliente (`Localidad`, `Provincia`, `Pais`) se guarda como texto dentro del propio `Cliente`.
 - **Backend** (`net9.0`): ASP.NET Core Web API + EF Core 8 + Npgsql (Supabase PostgreSQL). Controladores CRUD con borrado lógico (`isDeleted`) y endpoints `deleteds`/`restore`.
 - **Desktop** (`net9.0-windows`): WinForms con:
   - `SplashView` (barra de progreso + carga de datos + reporte) y luego `IniciarSesionView`.
@@ -63,10 +63,7 @@ Las migraciones `SeedProductos` y `SeedProductosYVentas` cargan los siguientes d
 
 | Tabla | Registros |
 | --- | --- |
-| `paises` | Argentina, Brasil, Chile |
-| `provincias` | Buenos Aires, Córdoba, Santa Fe |
-| `localidades` | Buenos Aires, Córdoba, Santa Fe, Rosario, San Justo |
-| `clientes` | Juan Pablo Aguero, María González, Pedro López |
+| `clientes` | Juan Pablo Aguero, María González, Pedro López (con localidad, provincia y país como texto: Rosario, Santa Fe, Argentina) |
 | `tipos_producto` | Consola, Juego, Suscripción |
 | `productos` | 10 productos (3 consolas, 4 juegos, 3 suscripciones) con imagen pública en Supabase Storage |
 | `ventas` / `detalles_venta` | 3 facturas de ejemplo: `FAC-00001`, `FAC-00002`, `FAC-00003` |
@@ -90,7 +87,7 @@ registrados en el proyecto de Firebase y pueden iniciar sesión inmediatamente.
 | Firebase Auth (login) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEYFIREBASE` |
 | Firebase Auth (alta) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEYFIREBASE` |
 | Backend (splash y API) | `https://api-tiendavideojuegos-jp.azurewebsites.net/api/` |
-| Supabase REST | `https://sukjueyvigrcyafzppjx.supabase.co/rest/v1/` (`clientes`, `localidades`, `provincias`, `paises`, `productos`, `tipos_producto`, `ventas`, `detalles_venta`) |
+| Supabase REST | `https://sukjueyvigrcyafzppjx.supabase.co/rest/v1/` (`clientes`, `productos`, `tipos_producto`, `ventas`, `detalles_venta`) |
 | Supabase Storage | `https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/` |
 
 ## Requisitos
@@ -128,6 +125,11 @@ Copiar `Backend/appsettings.example.json` a `Backend/appsettings.json` y configu
    ```
 2. Ejecutar `Database/grants.sql` para que PostgREST (`service_role`) pueda acceder a las tablas.
 3. Crear el bucket público `productos` en Supabase Storage.
+
+> La migración `ClienteUbicacionTexto` reemplazó las tablas `localidades`, `provincias` y `paises`
+> por columnas de texto (`localidad`, `provincia`, `pais`) dentro de `clientes`, copiando primero los
+> datos ya cargados. Esas tablas ya no existen ni tienen endpoints propios.
+> Al actualizar una instalación existente, hay que aplicar la migración **antes** de publicar el backend.
 
 ## Ejecutar
 

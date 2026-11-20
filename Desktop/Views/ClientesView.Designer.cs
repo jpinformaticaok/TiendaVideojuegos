@@ -42,10 +42,16 @@ namespace Desktop.Views
             label2 = new Label();
             dataGridClientes = new DataGridView();
             tabPageAgregarEditar = new TabPage();
+            txtLocalidad = new TextBox();
+            txtProvincia = new TextBox();
+            txtPais = new TextBox();
             txtDireccion = new TextBox();
             txtDni = new TextBox();
             txtApellido = new TextBox();
             txtNombre = new TextBox();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -178,10 +184,16 @@ namespace Desktop.Views
             // 
             // tabPageAgregarEditar
             // 
+            tabPageAgregarEditar.Controls.Add(txtPais);
+            tabPageAgregarEditar.Controls.Add(txtProvincia);
+            tabPageAgregarEditar.Controls.Add(txtLocalidad);
             tabPageAgregarEditar.Controls.Add(txtDireccion);
             tabPageAgregarEditar.Controls.Add(txtDni);
             tabPageAgregarEditar.Controls.Add(txtApellido);
             tabPageAgregarEditar.Controls.Add(txtNombre);
+            tabPageAgregarEditar.Controls.Add(label9);
+            tabPageAgregarEditar.Controls.Add(label8);
+            tabPageAgregarEditar.Controls.Add(label7);
             tabPageAgregarEditar.Controls.Add(label6);
             tabPageAgregarEditar.Controls.Add(label5);
             tabPageAgregarEditar.Controls.Add(label4);
@@ -194,69 +206,117 @@ namespace Desktop.Views
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar / Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
-            // 
+            //
+            // txtLocalidad
+            //
+            txtLocalidad.Location = new Point(120, 222);
+            txtLocalidad.Name = "txtLocalidad";
+            txtLocalidad.Size = new Size(513, 23);
+            txtLocalidad.TabIndex = 4;
+            //
+            // txtProvincia
+            //
+            txtProvincia.Location = new Point(120, 270);
+            txtProvincia.Name = "txtProvincia";
+            txtProvincia.Size = new Size(513, 23);
+            txtProvincia.TabIndex = 5;
+            //
+            // txtPais
+            //
+            txtPais.Location = new Point(120, 318);
+            txtPais.Name = "txtPais";
+            txtPais.Size = new Size(513, 23);
+            txtPais.TabIndex = 6;
+            //
             // txtDireccion
-            // 
-            txtDireccion.Location = new Point(120, 281);
+            //
+            txtDireccion.Location = new Point(120, 174);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(513, 23);
-            txtDireccion.TabIndex = 0;
+            txtDireccion.TabIndex = 3;
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(120, 209);
+            txtDni.Location = new Point(120, 126);
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(513, 23);
-            txtDni.TabIndex = 1;
+            txtDni.TabIndex = 2;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(120, 130);
+            txtApellido.Location = new Point(120, 78);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(513, 23);
-            txtApellido.TabIndex = 2;
+            txtApellido.TabIndex = 1;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(120, 42);
+            txtNombre.Location = new Point(120, 30);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(513, 23);
-            txtNombre.TabIndex = 3;
-            // 
+            txtNombre.TabIndex = 0;
+            //
+            // label7
+            //
+            label7.AutoSize = true;
+            label7.Location = new Point(40, 230);
+            label7.Name = "label7";
+            label7.Size = new Size(59, 15);
+            label7.TabIndex = 13;
+            label7.Text = "Localidad";
+            //
+            // label8
+            //
+            label8.AutoSize = true;
+            label8.Location = new Point(40, 278);
+            label8.Name = "label8";
+            label8.Size = new Size(56, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Provincia";
+            //
+            // label9
+            //
+            label9.AutoSize = true;
+            label9.Location = new Point(52, 326);
+            label9.Name = "label9";
+            label9.Size = new Size(28, 15);
+            label9.TabIndex = 15;
+            label9.Text = "País";
+            //
             // label6
-            // 
+            //
             label6.AutoSize = true;
-            label6.Location = new Point(40, 289);
+            label6.Location = new Point(40, 182);
             label6.Name = "label6";
             label6.Size = new Size(57, 15);
-            label6.TabIndex = 4;
+            label6.TabIndex = 12;
             label6.Text = "Dirección";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(70, 212);
+            label5.Location = new Point(70, 134);
             label5.Name = "label5";
             label5.Size = new Size(27, 15);
-            label5.TabIndex = 5;
+            label5.TabIndex = 11;
             label5.Text = "DNI";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(46, 133);
+            label4.Location = new Point(46, 86);
             label4.Name = "label4";
             label4.Size = new Size(51, 15);
-            label4.TabIndex = 6;
+            label4.TabIndex = 10;
             label4.Text = "Apellido";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(46, 50);
+            label3.Location = new Point(46, 38);
             label3.Name = "label3";
             label3.Size = new Size(51, 15);
-            label3.TabIndex = 7;
+            label3.TabIndex = 9;
             label3.Text = "Nombre";
             // 
             // btnCancelar
@@ -284,7 +344,7 @@ namespace Desktop.Views
             btnGuardar.Location = new Point(666, 87);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(83, 23);
-            btnGuardar.TabIndex = 9;
+            btnGuardar.TabIndex = 7;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
@@ -345,10 +405,16 @@ namespace Desktop.Views
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.TextBox txtLocalidad;
+        private System.Windows.Forms.TextBox txtProvincia;
+        private System.Windows.Forms.TextBox txtPais;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private FontAwesome.Sharp.IconButton btnGuardar;
         private FontAwesome.Sharp.IconButton btnCancelar;
         private Panel panelTitulo;

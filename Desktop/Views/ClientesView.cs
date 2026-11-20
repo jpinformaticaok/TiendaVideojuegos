@@ -48,10 +48,13 @@ namespace Desktop.Views
         {
             Cliente cliente = new Cliente
             {
-                Firstname = txtNombre.Text,
-                Lastname = txtApellido.Text,
-                Dni = txtDni.Text,
-                Address = txtDireccion.Text,
+                Firstname = txtNombre.Text.Trim(),
+                Lastname = txtApellido.Text.Trim(),
+                Dni = txtDni.Text.Trim(),
+                Address = txtDireccion.Text.Trim(),
+                Localidad = txtLocalidad.Text.Trim(),
+                Provincia = txtProvincia.Text.Trim(),
+                Pais = txtPais.Text.Trim(),
             };
             bool ok;
             if (clienteModificado == null)
@@ -79,6 +82,9 @@ namespace Desktop.Views
             txtApellido.Clear();
             txtDni.Clear();
             txtDireccion.Clear();
+            txtLocalidad.Clear();
+            txtProvincia.Clear();
+            txtPais.Clear();
         }
 
         private void btnModificar_Click(object? s, EventArgs e)
@@ -90,6 +96,9 @@ namespace Desktop.Views
                 txtApellido.Text = clienteModificado.Lastname;
                 txtDni.Text = clienteModificado.Dni;
                 txtDireccion.Text = clienteModificado.Address;
+                txtLocalidad.Text = clienteModificado.Localidad ?? string.Empty;
+                txtProvincia.Text = clienteModificado.Provincia ?? string.Empty;
+                txtPais.Text = clienteModificado.Pais ?? string.Empty;
                 tabControl.SelectedTab = tabPageAgregarEditar;
             }
         }

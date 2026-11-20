@@ -63,10 +63,23 @@ namespace Backend.Migrations
                         .HasColumnName("lastname")
                         .HasAnnotation("Relational:JsonPropertyName", "lastname");
 
-                    b.Property<int>("LocalidadId")
-                        .HasColumnType("integer")
-                        .HasColumnName("localidad_id")
-                        .HasAnnotation("Relational:JsonPropertyName", "localidad_id");
+                    b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("localidad")
+                        .HasAnnotation("Relational:JsonPropertyName", "localidad");
+
+                    b.Property<string>("Pais")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("pais")
+                        .HasAnnotation("Relational:JsonPropertyName", "pais");
+
+                    b.Property<string>("Provincia")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("provincia")
+                        .HasAnnotation("Relational:JsonPropertyName", "provincia");
 
                     b.Property<bool>("isDeleted")
                         .HasColumnType("boolean")
@@ -75,9 +88,6 @@ namespace Backend.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_clientes");
-
-                    b.HasIndex("LocalidadId")
-                        .HasDatabaseName("ix_clientes_localidad_id");
 
                     b.ToTable("clientes", (string)null);
 
@@ -90,7 +100,9 @@ namespace Backend.Migrations
                             Dni = "29720301",
                             Firstname = "Juan Pablo",
                             Lastname = "Aguero",
-                            LocalidadId = 4,
+                            Localidad = "Rosario",
+                            Pais = "Argentina",
+                            Provincia = "Santa Fe",
                             isDeleted = false
                         },
                         new
@@ -101,7 +113,9 @@ namespace Backend.Migrations
                             Dni = "87654321",
                             Firstname = "María",
                             Lastname = "González",
-                            LocalidadId = 4,
+                            Localidad = "Rosario",
+                            Pais = "Argentina",
+                            Provincia = "Santa Fe",
                             isDeleted = false
                         },
                         new
@@ -112,7 +126,9 @@ namespace Backend.Migrations
                             Dni = "11223344",
                             Firstname = "Pedro",
                             Lastname = "López",
-                            LocalidadId = 4,
+                            Localidad = "Rosario",
+                            Pais = "Argentina",
+                            Provincia = "Santa Fe",
                             isDeleted = false
                         });
                 });
@@ -226,125 +242,6 @@ namespace Backend.Migrations
                             Subtotal = 45000m,
                             UnitPrice = 45000m,
                             VentaId = 3
-                        });
-                });
-
-            modelBuilder.Entity("Services.Models.Localidad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasAnnotation("Relational:JsonPropertyName", "id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
-
-                    b.Property<int>("ProvinciaId")
-                        .HasColumnType("integer")
-                        .HasColumnName("provincia_id")
-                        .HasAnnotation("Relational:JsonPropertyName", "provincia_id");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_deleted")
-                        .HasAnnotation("Relational:JsonPropertyName", "is_deleted");
-
-                    b.HasKey("Id")
-                        .HasName("pk_localidades");
-
-                    b.HasIndex("ProvinciaId")
-                        .HasDatabaseName("ix_localidades_provincia_id");
-
-                    b.ToTable("localidades", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Buenos Aires",
-                            ProvinciaId = 1,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Córdoba",
-                            ProvinciaId = 2,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Santa Fe",
-                            ProvinciaId = 3,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Rosario",
-                            ProvinciaId = 3,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "San Justo",
-                            ProvinciaId = 3,
-                            isDeleted = false
-                        });
-                });
-
-            modelBuilder.Entity("Services.Models.Pais", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasAnnotation("Relational:JsonPropertyName", "id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_deleted")
-                        .HasAnnotation("Relational:JsonPropertyName", "is_deleted");
-
-                    b.HasKey("Id")
-                        .HasName("pk_paises");
-
-                    b.ToTable("paises", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Argentina",
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Brasil",
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Chile",
-                            isDeleted = false
                         });
                 });
 
@@ -566,64 +463,6 @@ namespace Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Services.Models.Provincia", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasAnnotation("Relational:JsonPropertyName", "id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
-
-                    b.Property<int>("PaisId")
-                        .HasColumnType("integer")
-                        .HasColumnName("pais_id")
-                        .HasAnnotation("Relational:JsonPropertyName", "pais_id");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_deleted")
-                        .HasAnnotation("Relational:JsonPropertyName", "is_deleted");
-
-                    b.HasKey("Id")
-                        .HasName("pk_provincias");
-
-                    b.HasIndex("PaisId")
-                        .HasDatabaseName("ix_provincias_pais_id");
-
-                    b.ToTable("provincias", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Buenos Aires",
-                            PaisId = 1,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Córdoba",
-                            PaisId = 1,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Santa Fe",
-                            PaisId = 1,
-                            isDeleted = false
-                        });
-                });
-
             modelBuilder.Entity("Services.Models.TipoProducto", b =>
                 {
                     b.Property<int>("Id")
@@ -747,18 +586,6 @@ namespace Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Services.Models.Cliente", b =>
-                {
-                    b.HasOne("Services.Models.Localidad", "Localidad")
-                        .WithMany()
-                        .HasForeignKey("LocalidadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_clientes_localidades_localidad_id");
-
-                    b.Navigation("Localidad");
-                });
-
             modelBuilder.Entity("Services.Models.DetalleVenta", b =>
                 {
                     b.HasOne("Services.Models.Producto", "Producto")
@@ -780,18 +607,6 @@ namespace Backend.Migrations
                     b.Navigation("Venta");
                 });
 
-            modelBuilder.Entity("Services.Models.Localidad", b =>
-                {
-                    b.HasOne("Services.Models.Provincia", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_localidades_provincias_provincia_id");
-
-                    b.Navigation("Provincia");
-                });
-
             modelBuilder.Entity("Services.Models.Producto", b =>
                 {
                     b.HasOne("Services.Models.TipoProducto", "TipoProducto")
@@ -802,18 +617,6 @@ namespace Backend.Migrations
                         .HasConstraintName("fk_productos_tipos_producto_tipo_producto_id");
 
                     b.Navigation("TipoProducto");
-                });
-
-            modelBuilder.Entity("Services.Models.Provincia", b =>
-                {
-                    b.HasOne("Services.Models.Pais", "Pais")
-                        .WithMany()
-                        .HasForeignKey("PaisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_provincias_paises_pais_id");
-
-                    b.Navigation("Pais");
                 });
 
             modelBuilder.Entity("Services.Models.Venta", b =>

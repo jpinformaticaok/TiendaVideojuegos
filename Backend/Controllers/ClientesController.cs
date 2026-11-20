@@ -23,10 +23,13 @@ namespace Backend.Controllers
             {
                 filtro = filtro.ToUpper();
                 return await _context.Clientes
-                    .Include(c => c.Localidad)
-                    .ThenInclude(l => l.Provincia)
-                    .ThenInclude(p => p.Pais)
-                    .Where(c => c.Firstname.ToUpper().Contains(filtro) || c.Lastname.ToUpper().Contains(filtro) || c.Dni.Contains(filtro) || c.Address.ToUpper().Contains(filtro))
+                    .Where(c => c.Firstname.ToUpper().Contains(filtro)
+                        || c.Lastname.ToUpper().Contains(filtro)
+                        || c.Dni.Contains(filtro)
+                        || c.Address.ToUpper().Contains(filtro)
+                        || c.Localidad.ToUpper().Contains(filtro)
+                        || c.Provincia.ToUpper().Contains(filtro)
+                        || c.Pais.ToUpper().Contains(filtro))
                     .ToListAsync();
             }
             catch (Exception ex)
@@ -40,9 +43,6 @@ namespace Backend.Controllers
         {
             return await _context.Clientes
                 .IgnoreQueryFilters()
-                .Include(c => c.Localidad)
-                .ThenInclude(l => l.Provincia)
-                .ThenInclude(p => p.Pais)
                 .Where(c => c.isDeleted)
                 .ToListAsync();
         }
@@ -58,11 +58,7 @@ namespace Backend.Controllers
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
             var cliente = await _context.Clientes
-                .Include(c => c.Localidad)
-                .ThenInclude(l => l.Provincia)
-                .ThenInclude(p => p.Pais)
                 .FirstOrDefaultAsync(c => c.Id == id);
-
             if (cliente == null) return NotFound();
             return cliente;
         }

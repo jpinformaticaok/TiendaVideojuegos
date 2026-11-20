@@ -18,6 +18,8 @@
         <Field Name="Dni"><DataField>Dni</DataField><rd:TypeName>System.String</rd:TypeName></Field>
         <Field Name="Address"><DataField>Address</DataField><rd:TypeName>System.String</rd:TypeName></Field>
         <Field Name="Localidad"><DataField>Localidad</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Provincia"><DataField>Provincia</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Pais"><DataField>Pais</DataField><rd:TypeName>System.String</rd:TypeName></Field>
       </Fields>
       <Query>
         <DataSourceName>DSClientes</DataSourceName>
@@ -52,35 +54,18 @@
       <Tablix Name="TablaClientes">
         <TablixBody>
           <TablixColumns>
-            <TablixColumn><Width>0.5in</Width></TablixColumn>
-            <TablixColumn><Width>1.4in</Width></TablixColumn>
-            <TablixColumn><Width>1.4in</Width></TablixColumn>
-            <TablixColumn><Width>1in</Width></TablixColumn>
-            <TablixColumn><Width>2in</Width></TablixColumn>
             <TablixColumn><Width>1.2in</Width></TablixColumn>
+            <TablixColumn><Width>1.2in</Width></TablixColumn>
+            <TablixColumn><Width>0.8in</Width></TablixColumn>
+            <TablixColumn><Width>1.5in</Width></TablixColumn>
+            <TablixColumn><Width>1in</Width></TablixColumn>
+            <TablixColumn><Width>1in</Width></TablixColumn>
+            <TablixColumn><Width>0.8in</Width></TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
               <Height>0.3in</Height>
               <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="cId">
-                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>ID</Value>
-                              <Style><FontWeight>Bold</FontWeight></Style>
-                            </TextRun>
-                          </TextRuns>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>cId</rd:DefaultName>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="cNombre">
@@ -171,6 +156,42 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cProvincia">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Provincia</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cProvincia</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cPais">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Pais</Value>
+                              <Style><FontWeight>Bold</FontWeight></Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>cPais</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -178,20 +199,8 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="vId">
-                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns><TextRun><Value>=Fields!id.Value</Value></TextRun></TextRuns>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>vId</rd:DefaultName>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="vNombre">
+                      <CanGrow>true</CanGrow>
                       <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
                       <Paragraphs>
                         <Paragraph>
@@ -205,6 +214,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="vApellido">
+                      <CanGrow>true</CanGrow>
                       <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
                       <Paragraphs>
                         <Paragraph>
@@ -218,6 +228,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="vDni">
+                      <CanGrow>true</CanGrow>
                       <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
                       <Paragraphs>
                         <Paragraph>
@@ -231,6 +242,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="vDireccion">
+                      <CanGrow>true</CanGrow>
                       <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
                       <Paragraphs>
                         <Paragraph>
@@ -244,6 +256,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="vLocalidad">
+                      <CanGrow>true</CanGrow>
                       <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
                       <Paragraphs>
                         <Paragraph>
@@ -254,12 +267,41 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vProvincia">
+                      <CanGrow>true</CanGrow>
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Provincia.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vProvincia</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="vPais">
+                      <CanGrow>true</CanGrow>
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns><TextRun><Value>=Fields!Pais.Value</Value></TextRun></TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>vPais</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />

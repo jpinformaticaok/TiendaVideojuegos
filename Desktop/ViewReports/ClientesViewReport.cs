@@ -23,6 +23,8 @@ namespace Desktop.ViewReports
             dt.Columns.Add("Dni", typeof(string));
             dt.Columns.Add("Address", typeof(string));
             dt.Columns.Add("Localidad", typeof(string));
+            dt.Columns.Add("Provincia", typeof(string));
+            dt.Columns.Add("Pais", typeof(string));
             if (clientes != null)
             {
                 foreach (var c in clientes)
@@ -33,7 +35,9 @@ namespace Desktop.ViewReports
                         c.Lastname,
                         c.Dni,
                         c.Address,
-                        c.Localidad?.Name ?? "Sin localidad"
+                        c.Localidad ?? string.Empty,
+                        c.Provincia ?? string.Empty,
+                        c.Pais ?? string.Empty
                     );
                 }
             }

@@ -23,7 +23,7 @@ namespace Desktop.Services
         {
             try
             {
-                var response = await httpClient.GetAsync("?select=*,localidad:localidades(*)");
+                var response = await httpClient.GetAsync("?select=*");
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
@@ -42,7 +42,7 @@ namespace Desktop.Services
         {
             try
             {
-                string filtrosupabase = $"?select=*,localidad:localidades(*)&or=(firstname.ilike.*{filter}*,lastname.ilike.*{filter}*,dni.ilike.*{filter}*)";
+                string filtrosupabase = $"?select=*&or=(firstname.ilike.*{filter}*,lastname.ilike.*{filter}*,dni.ilike.*{filter}*,localidad.ilike.*{filter}*,provincia.ilike.*{filter}*,pais.ilike.*{filter}*)";
                 var response = await httpClient.GetAsync(filtrosupabase);
                 if (response.IsSuccessStatusCode)
                 {

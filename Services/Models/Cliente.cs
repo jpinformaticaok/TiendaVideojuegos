@@ -22,10 +22,15 @@ namespace Services.Models
         [DisplayName("Dirección")]
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
-        [Browsable(false)]
-        [JsonPropertyName("localidad_id")]
-        public int LocalidadId { get; set; } = 0;
-        public Localidad? Localidad { get; set; }
+        [DisplayName("Localidad")]
+        [JsonPropertyName("localidad")]
+        public string Localidad { get; set; } = string.Empty;
+        [DisplayName("Provincia")]
+        [JsonPropertyName("provincia")]
+        public string Provincia { get; set; } = string.Empty;
+        [DisplayName("País")]
+        [JsonPropertyName("pais")]
+        public string Pais { get; set; } = string.Empty;
         [Browsable(false)]
         [JsonPropertyName("is_deleted")]
         public bool isDeleted { get; set; } = false;
