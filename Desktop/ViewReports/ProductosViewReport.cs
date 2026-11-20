@@ -34,8 +34,8 @@ namespace Desktop.ViewReports
                         p.Description,
                         p.Price,
                         p.Stock,
-                        p.Platform,
-                        p.Format
+                        p.Plataforma?.Name ?? string.Empty,
+                        p.Formato?.Name ?? string.Empty
                     );
                 }
             }

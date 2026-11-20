@@ -4,7 +4,7 @@ Sistema de gestión para una tienda de videojuegos (consolas, juegos digitales/f
 
 ## Proyectos
 
-- **Services** (`net9.0`): modelos compartidos (`Cliente`, `TipoProducto`, `Producto`, `Venta`, `DetalleVenta`). La ubicación del cliente (`Localidad`, `Provincia`, `Pais`) se guarda como texto dentro del propio `Cliente`.
+- **Services** (`net9.0`): modelos compartidos (`Cliente`, `TipoProducto`, `Plataforma`, `Formato`, `Producto`, `Venta`, `DetalleVenta`). La ubicación del cliente (`Localidad`, `Provincia`, `Pais`) se guarda como texto dentro del propio `Cliente`.
 - **Backend** (`net9.0`): ASP.NET Core Web API + EF Core 8 + Npgsql (Supabase PostgreSQL). Controladores CRUD con borrado lógico (`isDeleted`) y endpoints `deleteds`/`restore`.
 - **Desktop** (`net9.0-windows`): WinForms con:
   - `SplashView` (barra de progreso + carga de datos + reporte) y luego `IniciarSesionView`.
@@ -13,6 +13,7 @@ Sistema de gestión para una tienda de videojuegos (consolas, juegos digitales/f
   - `MenuPrincipalView` MDI con `MenuStrip` + `FontAwesome.Sharp.IconMenuItem`.
   - Vistas CRUD con `TabControl`, `DataGridView`, `FontAwesome.Sharp.IconButton`.
   - Formularios editables en el **Diseñador de Visual Studio 2022** (cada uno con su `.Designer.cs` y `.resx`).
+  - ComboBox de `Plataforma`/`Formato` en los productos, filtros por plataforma/formato en la lista y submenús **Plataformas**/**Formatos** con CRUD propio (`PlataformasView`/`FormatosView`).
   - Reportes con `ReportViewerCore.WinForms` (`ViewReports`).
   - Imágenes pequeñas de productos (`PictureBox`) desde Supabase Storage.
 
@@ -65,7 +66,9 @@ Las migraciones `SeedProductos` y `SeedProductosYVentas` cargan los siguientes d
 | --- | --- |
 | `clientes` | Juan Pablo Aguero, María González, Pedro López (con localidad, provincia y país como texto: Rosario, Santa Fe, Argentina) |
 | `tipos_producto` | Consola, Juego, Suscripción |
-| `productos` | 10 productos (3 consolas, 4 juegos, 3 suscripciones) con imagen pública en Supabase Storage |
+| `plataformas` | PlayStation, Xbox, Nintendo, PC |
+| `formatos` | Físico, Digital |
+| `productos` | 10 productos (3 consolas, 4 juegos, 3 suscripciones) con imagen pública en Supabase Storage; cada uno con `plataforma_id` y `formato_id` |
 | `ventas` / `detalles_venta` | 3 facturas de ejemplo: `FAC-00001`, `FAC-00002`, `FAC-00003` |
 
 La numeración de facturas es local y correlativa (`FAC-00001`, `FAC-00002`, ...).
@@ -87,7 +90,7 @@ registrados en el proyecto de Firebase y pueden iniciar sesión inmediatamente.
 | Firebase Auth (login) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEYFIREBASE` |
 | Firebase Auth (alta) | `POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEYFIREBASE` |
 | Backend (splash y API) | `https://api-tiendavideojuegos-jp.azurewebsites.net/api/` |
-| Supabase REST | `https://sukjueyvigrcyafzppjx.supabase.co/rest/v1/` (`clientes`, `productos`, `tipos_producto`, `ventas`, `detalles_venta`) |
+| Supabase REST | `https://sukjueyvigrcyafzppjx.supabase.co/rest/v1/` (`clientes`, `productos`, `tipos_producto`, `plataformas`, `formatos`, `ventas`, `detalles_venta`) |
 | Supabase Storage | `https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/` |
 
 ## Requisitos
@@ -129,7 +132,11 @@ Copiar `Backend/appsettings.example.json` a `Backend/appsettings.json` y configu
 > La migración `ClienteUbicacionTexto` reemplazó las tablas `localidades`, `provincias` y `paises`
 > por columnas de texto (`localidad`, `provincia`, `pais`) dentro de `clientes`, copiando primero los
 > datos ya cargados. Esas tablas ya no existen ni tienen endpoints propios.
-> Al actualizar una instalación existente, hay que aplicar la migración **antes** de publicar el backend.
+>
+> La migración `ProductoPlataformaFormato` convierte `Producto` en un modelo con tablas `plataformas`
+> y `formatos`, reemplazando las columnas de texto `platform`/`format` por las FKs
+> `plataforma_id`/`formato_id`: al cambiar las tablas viejas por nuevas, el backfill migra los valores
+> antes de borrar las columnas. No apliques migraciones en Supabase antes de publicar el nuevo backend.
 
 ## Ejecutar
 

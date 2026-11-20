@@ -27,12 +27,14 @@ namespace Services.Models
         [JsonPropertyName("tipo_producto_id")]
         public int TipoProductoId { get; set; }
         public TipoProducto? TipoProducto { get; set; }
-        [DisplayName("Formato")]
-        [JsonPropertyName("format")]
-        public string Format { get; set; } = string.Empty;
-        [DisplayName("Plataforma")]
-        [JsonPropertyName("platform")]
-        public string Platform { get; set; } = string.Empty;
+        [Browsable(false)]
+        [JsonPropertyName("plataforma_id")]
+        public int PlataformaId { get; set; }
+        public Plataforma? Plataforma { get; set; }
+        [Browsable(false)]
+        [JsonPropertyName("formato_id")]
+        public int FormatoId { get; set; }
+        public Formato? Formato { get; set; }
         [Browsable(false)]
         [JsonPropertyName("created_at")]
         public DateTimeOffset? Created_at { get; set; } = DateTimeOffset.UtcNow;

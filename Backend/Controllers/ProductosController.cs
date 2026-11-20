@@ -18,18 +18,32 @@ namespace Backend.Controllers
             filtro = filtro.ToUpper();
             return await _context.Productos
                 .Include(p => p.TipoProducto)
-                .Where(p => p.Name.ToUpper().Contains(filtro) || p.Description.ToUpper().Contains(filtro) || p.Platform.ToUpper().Contains(filtro))
+                .Include(p => p.Plataforma)
+                .Include(p => p.Formato)
+                .Where(p => p.Name.ToUpper().Contains(filtro)
+                    || p.Description.ToUpper().Contains(filtro)
+                    || (p.Plataforma != null && p.Plataforma.Name.ToUpper().Contains(filtro))
+                    || (p.Formato != null && p.Formato.Name.ToUpper().Contains(filtro)))
                 .ToListAsync();
         }
 
         [HttpGet("deleteds")]
         public async Task<ActionResult<IEnumerable<Producto>>> GetDeleteds() =>
-            await _context.Productos.IgnoreQueryFilters().Include(p => p.TipoProducto).Where(p => p.isDeleted).ToListAsync();
+            await _context.Productos.IgnoreQueryFilters()
+                .Include(p => p.TipoProducto)
+                .Include(p => p.Plataforma)
+                .Include(p => p.Formato)
+                .Where(p => p.isDeleted)
+                .ToListAsync();
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProducto(int id)
         {
-            var p = await _context.Productos.Include(x => x.TipoProducto).FirstOrDefaultAsync(x => x.Id == id);
+            var p = await _context.Productos
+                .Include(x => x.TipoProducto)
+                .Include(x => x.Plataforma)
+                .Include(x => x.Formato)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (p == null) return NotFound();
             return p;
         }

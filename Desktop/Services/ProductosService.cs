@@ -22,7 +22,7 @@ namespace Desktop.Services
         {
             try
             {
-                var response = await httpClient.GetAsync(urlApi + "?select=*,tipo_producto:tipos_producto(*)");
+                var response = await httpClient.GetAsync("?select=*,tipo_producto:tipos_producto(*),plataforma:plataformas(*),formato:formatos(*)");
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
@@ -41,7 +41,7 @@ namespace Desktop.Services
         {
             try
             {
-                string filtrosupabase = $"?or=(name.ilike.*{filter}*,description.ilike.*{filter}*,platform.ilike.*{filter}*)";
+                string filtrosupabase = $"?select=*,tipo_producto:tipos_producto(*),plataforma:plataformas(*),formato:formatos(*)&or=(name.ilike.*{filter}*,description.ilike.*{filter}*)";
                 var response = await httpClient.GetAsync(filtrosupabase);
                 if (response.IsSuccessStatusCode)
                 {

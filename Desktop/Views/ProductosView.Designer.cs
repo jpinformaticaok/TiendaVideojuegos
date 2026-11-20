@@ -42,6 +42,10 @@ namespace Desktop.Views
             btnBuscar = new IconButton();
             txtBusqueda = new TextBox();
             label2 = new Label();
+            label11 = new Label();
+            cmbFiltroPlataforma = new ComboBox();
+            label12 = new Label();
+            cmbFiltroFormato = new ComboBox();
             dataGridProductos = new DataGridView();
             tabPageAgregarEditar = new TabPage();
             label3 = new Label();
@@ -57,9 +61,9 @@ namespace Desktop.Views
             label8 = new Label();
             cmbTipo = new ComboBox();
             label9 = new Label();
-            txtFormato = new TextBox();
+            cmbFormato = new ComboBox();
             label10 = new Label();
-            txtPlataforma = new TextBox();
+            cmbPlataforma = new ComboBox();
             btnGuardar = new IconButton();
             btnCancelar = new IconButton();
             panelTitulo = new Panel();
@@ -94,6 +98,10 @@ namespace Desktop.Views
             tabPageLista.Controls.Add(btnBuscar);
             tabPageLista.Controls.Add(txtBusqueda);
             tabPageLista.Controls.Add(label2);
+            tabPageLista.Controls.Add(label11);
+            tabPageLista.Controls.Add(cmbFiltroPlataforma);
+            tabPageLista.Controls.Add(label12);
+            tabPageLista.Controls.Add(cmbFiltroFormato);
             tabPageLista.Controls.Add(dataGridProductos);
             tabPageLista.Location = new Point(4, 24);
             tabPageLista.Name = "tabPageLista";
@@ -199,15 +207,51 @@ namespace Desktop.Views
             label2.TabIndex = 7;
             label2.Text = "Buscar";
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(6, 61);
+            label11.Name = "label11";
+            label11.Size = new Size(65, 15);
+            label11.TabIndex = 9;
+            label11.Text = "Plataforma";
+            // 
+            // cmbFiltroPlataforma
+            // 
+            cmbFiltroPlataforma.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFiltroPlataforma.Location = new Point(76, 58);
+            cmbFiltroPlataforma.Name = "cmbFiltroPlataforma";
+            cmbFiltroPlataforma.Size = new Size(150, 23);
+            cmbFiltroPlataforma.TabIndex = 10;
+            cmbFiltroPlataforma.SelectedIndexChanged += cmbFiltro_SelectedIndexChanged;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(240, 61);
+            label12.Name = "label12";
+            label12.Size = new Size(52, 15);
+            label12.TabIndex = 11;
+            label12.Text = "Formato";
+            // 
+            // cmbFiltroFormato
+            // 
+            cmbFiltroFormato.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFiltroFormato.Location = new Point(296, 58);
+            cmbFiltroFormato.Name = "cmbFiltroFormato";
+            cmbFiltroFormato.Size = new Size(130, 23);
+            cmbFiltroFormato.TabIndex = 12;
+            cmbFiltroFormato.SelectedIndexChanged += cmbFiltro_SelectedIndexChanged;
+            // 
             // dataGridProductos
             // 
             dataGridProductos.AllowUserToAddRows = false;
             dataGridProductos.AllowUserToDeleteRows = false;
             dataGridProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridProductos.Location = new Point(6, 59);
+            dataGridProductos.Location = new Point(6, 95);
             dataGridProductos.Name = "dataGridProductos";
             dataGridProductos.ReadOnly = true;
-            dataGridProductos.Size = new Size(626, 286);
+            dataGridProductos.Size = new Size(626, 250);
             dataGridProductos.TabIndex = 8;
             dataGridProductos.SelectionChanged += dataGridProductos_SelectionChanged;
             // 
@@ -226,9 +270,9 @@ namespace Desktop.Views
             tabPageAgregarEditar.Controls.Add(label8);
             tabPageAgregarEditar.Controls.Add(cmbTipo);
             tabPageAgregarEditar.Controls.Add(label9);
-            tabPageAgregarEditar.Controls.Add(txtFormato);
+            tabPageAgregarEditar.Controls.Add(cmbFormato);
             tabPageAgregarEditar.Controls.Add(label10);
-            tabPageAgregarEditar.Controls.Add(txtPlataforma);
+            tabPageAgregarEditar.Controls.Add(cmbPlataforma);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Location = new Point(4, 24);
@@ -344,12 +388,13 @@ namespace Desktop.Views
             label9.TabIndex = 12;
             label9.Text = "Formato";
             // 
-            // txtFormato
+            // cmbFormato
             // 
-            txtFormato.Location = new Point(120, 219);
-            txtFormato.Name = "txtFormato";
-            txtFormato.Size = new Size(513, 23);
-            txtFormato.TabIndex = 13;
+            cmbFormato.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFormato.Location = new Point(120, 219);
+            cmbFormato.Name = "cmbFormato";
+            cmbFormato.Size = new Size(513, 23);
+            cmbFormato.TabIndex = 13;
             // 
             // label10
             // 
@@ -360,12 +405,13 @@ namespace Desktop.Views
             label10.TabIndex = 14;
             label10.Text = "Plataforma";
             // 
-            // txtPlataforma
+            // cmbPlataforma
             // 
-            txtPlataforma.Location = new Point(120, 267);
-            txtPlataforma.Name = "txtPlataforma";
-            txtPlataforma.Size = new Size(513, 23);
-            txtPlataforma.TabIndex = 15;
+            cmbPlataforma.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlataforma.Location = new Point(120, 267);
+            cmbPlataforma.Name = "cmbPlataforma";
+            cmbPlataforma.Size = new Size(513, 23);
+            cmbPlataforma.TabIndex = 15;
             // 
             // btnGuardar
             // 
@@ -469,8 +515,10 @@ namespace Desktop.Views
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.TextBox txtImagenUrl;
         private System.Windows.Forms.ComboBox cmbTipo;
-        private System.Windows.Forms.TextBox txtFormato;
-        private System.Windows.Forms.TextBox txtPlataforma;
+        private System.Windows.Forms.ComboBox cmbFormato;
+        private System.Windows.Forms.ComboBox cmbPlataforma;
+        private System.Windows.Forms.ComboBox cmbFiltroPlataforma;
+        private System.Windows.Forms.ComboBox cmbFiltroFormato;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -479,6 +527,8 @@ namespace Desktop.Views
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox picProducto;
         private System.Windows.Forms.Button btnTiposProducto;
         private Panel panelTitulo;

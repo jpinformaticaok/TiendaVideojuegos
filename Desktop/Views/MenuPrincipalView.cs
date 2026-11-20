@@ -24,6 +24,16 @@ namespace Desktop.Views
             OpenMdi(new TiposProductoView());
         }
 
+        private void subMenuPlataformas_Click(object? sender, EventArgs e)
+        {
+            OpenMdi(new PlataformasView());
+        }
+
+        private void subMenuFormatos_Click(object? sender, EventArgs e)
+        {
+            OpenMdi(new FormatosView());
+        }
+
         private void subMenuVentas_Click(object? sender, EventArgs e)
         {
             OpenMdi(new VentasView());

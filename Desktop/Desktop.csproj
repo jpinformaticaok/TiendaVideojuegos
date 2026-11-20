@@ -60,6 +60,12 @@
     <Compile Update="Views\TiposProductoView.cs"><SubType>Form</SubType></Compile>
     <Compile Update="Views\TiposProductoView.Designer.cs"><DependentUpon>TiposProductoView.cs</DependentUpon></Compile>
     <EmbeddedResource Update="Views\TiposProductoView.resx"><DependentUpon>TiposProductoView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\PlataformasView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\PlataformasView.Designer.cs"><DependentUpon>PlataformasView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\PlataformasView.resx"><DependentUpon>PlataformasView.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Views\FormatosView.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Views\FormatosView.Designer.cs"><DependentUpon>FormatosView.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Views\FormatosView.resx"><DependentUpon>FormatosView.cs</DependentUpon></EmbeddedResource>
     <Compile Update="Views\VentasView.cs"><SubType>Form</SubType></Compile>
     <Compile Update="Views\VentasView.Designer.cs"><DependentUpon>VentasView.cs</DependentUpon></Compile>
     <EmbeddedResource Update="Views\VentasView.resx"><DependentUpon>VentasView.cs</DependentUpon></EmbeddedResource>

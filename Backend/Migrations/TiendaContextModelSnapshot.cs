@@ -245,6 +245,100 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Services.Models.Formato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted")
+                        .HasAnnotation("Relational:JsonPropertyName", "is_deleted");
+
+                    b.HasKey("Id")
+                        .HasName("pk_formatos");
+
+                    b.ToTable("formatos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Físico",
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Digital",
+                            isDeleted = false
+                        });
+                });
+
+            modelBuilder.Entity("Services.Models.Plataforma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted")
+                        .HasAnnotation("Relational:JsonPropertyName", "is_deleted");
+
+                    b.HasKey("Id")
+                        .HasName("pk_plataformas");
+
+                    b.ToTable("plataformas", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "PlayStation",
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Xbox",
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Nintendo",
+                            isDeleted = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "PC",
+                            isDeleted = false
+                        });
+                });
+
             modelBuilder.Entity("Services.Models.Producto", b =>
                 {
                     b.Property<int?>("Id")
@@ -268,11 +362,10 @@ namespace Backend.Migrations
                         .HasColumnName("description")
                         .HasAnnotation("Relational:JsonPropertyName", "description");
 
-                    b.Property<string>("Format")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("format")
-                        .HasAnnotation("Relational:JsonPropertyName", "format");
+                    b.Property<int>("FormatoId")
+                        .HasColumnType("integer")
+                        .HasColumnName("formato_id")
+                        .HasAnnotation("Relational:JsonPropertyName", "formato_id");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -286,11 +379,10 @@ namespace Backend.Migrations
                         .HasColumnName("name")
                         .HasAnnotation("Relational:JsonPropertyName", "name");
 
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("platform")
-                        .HasAnnotation("Relational:JsonPropertyName", "platform");
+                    b.Property<int>("PlataformaId")
+                        .HasColumnType("integer")
+                        .HasColumnName("plataforma_id")
+                        .HasAnnotation("Relational:JsonPropertyName", "plataforma_id");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
@@ -315,6 +407,12 @@ namespace Backend.Migrations
                     b.HasKey("Id")
                         .HasName("pk_productos");
 
+                    b.HasIndex("FormatoId")
+                        .HasDatabaseName("ix_productos_formato_id");
+
+                    b.HasIndex("PlataformaId")
+                        .HasDatabaseName("ix_productos_plataforma_id");
+
                     b.HasIndex("TipoProductoId")
                         .HasDatabaseName("ix_productos_tipo_producto_id");
 
@@ -326,10 +424,10 @@ namespace Backend.Migrations
                             Id = 1,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Consola PlayStation 5 Slim 1TB",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/ps5.png",
                             Name = "PlayStation 5 Slim",
-                            Platform = "PlayStation",
+                            PlataformaId = 1,
                             Price = 1250000m,
                             Stock = 8,
                             TipoProductoId = 1,
@@ -340,10 +438,10 @@ namespace Backend.Migrations
                             Id = 2,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Consola Xbox Series X 1TB",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/xbox.png",
                             Name = "Xbox Series X",
-                            Platform = "Xbox",
+                            PlataformaId = 2,
                             Price = 1150000m,
                             Stock = 6,
                             TipoProductoId = 1,
@@ -354,10 +452,10 @@ namespace Backend.Migrations
                             Id = 3,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Consola Nintendo Switch OLED 64GB",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/switch.png",
                             Name = "Nintendo Switch OLED",
-                            Platform = "Nintendo",
+                            PlataformaId = 3,
                             Price = 780000m,
                             Stock = 10,
                             TipoProductoId = 1,
@@ -368,10 +466,10 @@ namespace Backend.Migrations
                             Id = 4,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Juego de fútbol para PlayStation 5",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/fc25.png",
                             Name = "EA Sports FC 25",
-                            Platform = "PlayStation",
+                            PlataformaId = 1,
                             Price = 95000m,
                             Stock = 25,
                             TipoProductoId = 2,
@@ -382,10 +480,10 @@ namespace Backend.Migrations
                             Id = 5,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Shooter para Xbox Series X",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/cod.png",
                             Name = "Call of Duty: Black Ops 6",
-                            Platform = "Xbox",
+                            PlataformaId = 2,
                             Price = 105000m,
                             Stock = 20,
                             TipoProductoId = 2,
@@ -396,10 +494,10 @@ namespace Backend.Migrations
                             Id = 6,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Aventura para Nintendo Switch",
-                            Format = "Físico",
+                            FormatoId = 1,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/zelda.png",
                             Name = "Zelda: Tears of the Kingdom",
-                            Platform = "Nintendo",
+                            PlataformaId = 3,
                             Price = 88000m,
                             Stock = 15,
                             TipoProductoId = 2,
@@ -410,10 +508,10 @@ namespace Backend.Migrations
                             Id = 7,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Juego digital para PC",
-                            Format = "Digital",
+                            FormatoId = 2,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/minecraft.png",
                             Name = "Minecraft Java Edition",
-                            Platform = "PC",
+                            PlataformaId = 4,
                             Price = 25000m,
                             Stock = 999,
                             TipoProductoId = 2,
@@ -424,10 +522,10 @@ namespace Backend.Migrations
                             Id = 8,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Suscripción PlayStation Plus 3 meses",
-                            Format = "Digital",
+                            FormatoId = 2,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/psplus.png",
                             Name = "PlayStation Plus Essential",
-                            Platform = "PlayStation",
+                            PlataformaId = 1,
                             Price = 45000m,
                             Stock = 100,
                             TipoProductoId = 3,
@@ -438,10 +536,10 @@ namespace Backend.Migrations
                             Id = 9,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Suscripción Game Pass Ultimate 1 mes",
-                            Format = "Digital",
+                            FormatoId = 2,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/gamepass.png",
                             Name = "Xbox Game Pass Ultimate",
-                            Platform = "Xbox",
+                            PlataformaId = 2,
                             Price = 30000m,
                             Stock = 100,
                             TipoProductoId = 3,
@@ -452,10 +550,10 @@ namespace Backend.Migrations
                             Id = 10,
                             Created_at = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Suscripción Switch Online 12 meses",
-                            Format = "Digital",
+                            FormatoId = 2,
                             ImageUrl = "https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/nso.png",
                             Name = "Nintendo Switch Online",
-                            Platform = "Nintendo",
+                            PlataformaId = 3,
                             Price = 35000m,
                             Stock = 100,
                             TipoProductoId = 3,
@@ -609,12 +707,30 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Services.Models.Producto", b =>
                 {
+                    b.HasOne("Services.Models.Formato", "Formato")
+                        .WithMany()
+                        .HasForeignKey("FormatoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_productos_formatos_formato_id");
+
+                    b.HasOne("Services.Models.Plataforma", "Plataforma")
+                        .WithMany()
+                        .HasForeignKey("PlataformaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_productos_plataformas_plataforma_id");
+
                     b.HasOne("Services.Models.TipoProducto", "TipoProducto")
                         .WithMany()
                         .HasForeignKey("TipoProductoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_productos_tipos_producto_tipo_producto_id");
+
+                    b.Navigation("Formato");
+
+                    b.Navigation("Plataforma");
 
                     b.Navigation("TipoProducto");
                 });

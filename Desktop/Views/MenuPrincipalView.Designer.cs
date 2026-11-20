@@ -37,6 +37,8 @@ namespace Desktop.Views
             subMenuClientes = new IconMenuItem();
             subMenuProductos = new IconMenuItem();
             subMenuTiposProducto = new IconMenuItem();
+            subMenuPlataformas = new IconMenuItem();
+            subMenuFormatos = new IconMenuItem();
             subMenuVentas = new IconMenuItem();
             subMenuReportes = new IconMenuItem();
             subMenuListadoClientes = new IconMenuItem();
@@ -57,7 +59,7 @@ namespace Desktop.Views
             // 
             // iconMenuItem1
             // 
-            iconMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { subMenuClientes, subMenuProductos, subMenuTiposProducto, subMenuVentas });
+            iconMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { subMenuClientes, subMenuProductos, subMenuTiposProducto, subMenuPlataformas, subMenuFormatos, subMenuVentas });
             iconMenuItem1.IconChar = IconChar.House;
             iconMenuItem1.IconColor = Color.Black;
             iconMenuItem1.IconFont = IconFont.Auto;
@@ -94,6 +96,26 @@ namespace Desktop.Views
             subMenuTiposProducto.Size = new Size(171, 22);
             subMenuTiposProducto.Text = "Tipos de Producto";
             subMenuTiposProducto.Click += subMenuTiposProducto_Click;
+            // 
+            // subMenuPlataformas
+            // 
+            subMenuPlataformas.IconChar = IconChar.Desktop;
+            subMenuPlataformas.IconColor = Color.Black;
+            subMenuPlataformas.IconFont = IconFont.Auto;
+            subMenuPlataformas.Name = "subMenuPlataformas";
+            subMenuPlataformas.Size = new Size(171, 22);
+            subMenuPlataformas.Text = "Plataformas";
+            subMenuPlataformas.Click += subMenuPlataformas_Click;
+            // 
+            // subMenuFormatos
+            // 
+            subMenuFormatos.IconChar = IconChar.Box;
+            subMenuFormatos.IconColor = Color.Black;
+            subMenuFormatos.IconFont = IconFont.Auto;
+            subMenuFormatos.Name = "subMenuFormatos";
+            subMenuFormatos.Size = new Size(171, 22);
+            subMenuFormatos.Text = "Formatos";
+            subMenuFormatos.Click += subMenuFormatos_Click;
             // 
             // subMenuVentas
             // 
@@ -179,6 +201,8 @@ namespace Desktop.Views
         private FontAwesome.Sharp.IconMenuItem subMenuClientes;
         private FontAwesome.Sharp.IconMenuItem subMenuProductos;
         private FontAwesome.Sharp.IconMenuItem subMenuTiposProducto;
+        private FontAwesome.Sharp.IconMenuItem subMenuPlataformas;
+        private FontAwesome.Sharp.IconMenuItem subMenuFormatos;
         private FontAwesome.Sharp.IconMenuItem subMenuVentas;
         private FontAwesome.Sharp.IconMenuItem subMenuReportes;
         private FontAwesome.Sharp.IconMenuItem subMenuListadoClientes;

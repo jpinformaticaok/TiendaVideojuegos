@@ -15,6 +15,8 @@ namespace Backend.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<TipoProducto> TiposProducto { get; set; }
+        public DbSet<Plataforma> Plataformas { get; set; }
+        public DbSet<Formato> Formatos { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
@@ -54,18 +56,31 @@ namespace Backend.Data
 
             string StorageUrl(string archivo) => $"https://sukjueyvigrcyafzppjx.supabase.co/storage/v1/object/public/productos/{archivo}";
 
+            // Seed Plataformas y Formatos
+            modelBuilder.Entity<Plataforma>().HasData(
+                new Plataforma { Id = 1, Name = "PlayStation" },
+                new Plataforma { Id = 2, Name = "Xbox" },
+                new Plataforma { Id = 3, Name = "Nintendo" },
+                new Plataforma { Id = 4, Name = "PC" }
+            );
+
+            modelBuilder.Entity<Formato>().HasData(
+                new Formato { Id = 1, Name = "Físico" },
+                new Formato { Id = 2, Name = "Digital" }
+            );
+
             // Seed Productos (consolas, juegos y suscripciones)
             modelBuilder.Entity<Producto>().HasData(
-                new Producto { Id = 1, Name = "PlayStation 5 Slim", Description = "Consola PlayStation 5 Slim 1TB", Price = 1250000, Stock = 8, ImageUrl = StorageUrl("ps5.png"), TipoProductoId = 1, Format = "Físico", Platform = "PlayStation", Created_at = fechaSeed },
-                new Producto { Id = 2, Name = "Xbox Series X", Description = "Consola Xbox Series X 1TB", Price = 1150000, Stock = 6, ImageUrl = StorageUrl("xbox.png"), TipoProductoId = 1, Format = "Físico", Platform = "Xbox", Created_at = fechaSeed },
-                new Producto { Id = 3, Name = "Nintendo Switch OLED", Description = "Consola Nintendo Switch OLED 64GB", Price = 780000, Stock = 10, ImageUrl = StorageUrl("switch.png"), TipoProductoId = 1, Format = "Físico", Platform = "Nintendo", Created_at = fechaSeed },
-                new Producto { Id = 4, Name = "EA Sports FC 25", Description = "Juego de fútbol para PlayStation 5", Price = 95000, Stock = 25, ImageUrl = StorageUrl("fc25.png"), TipoProductoId = 2, Format = "Físico", Platform = "PlayStation", Created_at = fechaSeed },
-                new Producto { Id = 5, Name = "Call of Duty: Black Ops 6", Description = "Shooter para Xbox Series X", Price = 105000, Stock = 20, ImageUrl = StorageUrl("cod.png"), TipoProductoId = 2, Format = "Físico", Platform = "Xbox", Created_at = fechaSeed },
-                new Producto { Id = 6, Name = "Zelda: Tears of the Kingdom", Description = "Aventura para Nintendo Switch", Price = 88000, Stock = 15, ImageUrl = StorageUrl("zelda.png"), TipoProductoId = 2, Format = "Físico", Platform = "Nintendo", Created_at = fechaSeed },
-                new Producto { Id = 7, Name = "Minecraft Java Edition", Description = "Juego digital para PC", Price = 25000, Stock = 999, ImageUrl = StorageUrl("minecraft.png"), TipoProductoId = 2, Format = "Digital", Platform = "PC", Created_at = fechaSeed },
-                new Producto { Id = 8, Name = "PlayStation Plus Essential", Description = "Suscripción PlayStation Plus 3 meses", Price = 45000, Stock = 100, ImageUrl = StorageUrl("psplus.png"), TipoProductoId = 3, Format = "Digital", Platform = "PlayStation", Created_at = fechaSeed },
-                new Producto { Id = 9, Name = "Xbox Game Pass Ultimate", Description = "Suscripción Game Pass Ultimate 1 mes", Price = 30000, Stock = 100, ImageUrl = StorageUrl("gamepass.png"), TipoProductoId = 3, Format = "Digital", Platform = "Xbox", Created_at = fechaSeed },
-                new Producto { Id = 10, Name = "Nintendo Switch Online", Description = "Suscripción Switch Online 12 meses", Price = 35000, Stock = 100, ImageUrl = StorageUrl("nso.png"), TipoProductoId = 3, Format = "Digital", Platform = "Nintendo", Created_at = fechaSeed }
+                new Producto { Id = 1, Name = "PlayStation 5 Slim", Description = "Consola PlayStation 5 Slim 1TB", Price = 1250000, Stock = 8, ImageUrl = StorageUrl("ps5.png"), TipoProductoId = 1, PlataformaId = 1, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 2, Name = "Xbox Series X", Description = "Consola Xbox Series X 1TB", Price = 1150000, Stock = 6, ImageUrl = StorageUrl("xbox.png"), TipoProductoId = 1, PlataformaId = 2, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 3, Name = "Nintendo Switch OLED", Description = "Consola Nintendo Switch OLED 64GB", Price = 780000, Stock = 10, ImageUrl = StorageUrl("switch.png"), TipoProductoId = 1, PlataformaId = 3, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 4, Name = "EA Sports FC 25", Description = "Juego de fútbol para PlayStation 5", Price = 95000, Stock = 25, ImageUrl = StorageUrl("fc25.png"), TipoProductoId = 2, PlataformaId = 1, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 5, Name = "Call of Duty: Black Ops 6", Description = "Shooter para Xbox Series X", Price = 105000, Stock = 20, ImageUrl = StorageUrl("cod.png"), TipoProductoId = 2, PlataformaId = 2, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 6, Name = "Zelda: Tears of the Kingdom", Description = "Aventura para Nintendo Switch", Price = 88000, Stock = 15, ImageUrl = StorageUrl("zelda.png"), TipoProductoId = 2, PlataformaId = 3, FormatoId = 1, Created_at = fechaSeed },
+                new Producto { Id = 7, Name = "Minecraft Java Edition", Description = "Juego digital para PC", Price = 25000, Stock = 999, ImageUrl = StorageUrl("minecraft.png"), TipoProductoId = 2, PlataformaId = 4, FormatoId = 2, Created_at = fechaSeed },
+                new Producto { Id = 8, Name = "PlayStation Plus Essential", Description = "Suscripción PlayStation Plus 3 meses", Price = 45000, Stock = 100, ImageUrl = StorageUrl("psplus.png"), TipoProductoId = 3, PlataformaId = 1, FormatoId = 2, Created_at = fechaSeed },
+                new Producto { Id = 9, Name = "Xbox Game Pass Ultimate", Description = "Suscripción Game Pass Ultimate 1 mes", Price = 30000, Stock = 100, ImageUrl = StorageUrl("gamepass.png"), TipoProductoId = 3, PlataformaId = 2, FormatoId = 2, Created_at = fechaSeed },
+                new Producto { Id = 10, Name = "Nintendo Switch Online", Description = "Suscripción Switch Online 12 meses", Price = 35000, Stock = 100, ImageUrl = StorageUrl("nso.png"), TipoProductoId = 3, PlataformaId = 3, FormatoId = 2, Created_at = fechaSeed }
             );
 
             // Seed Ventas de ejemplo (facturación local)
@@ -100,6 +115,8 @@ namespace Backend.Data
             // query filters isDeleted
             modelBuilder.Entity<Cliente>().HasQueryFilter(c => !c.isDeleted);
             modelBuilder.Entity<TipoProducto>().HasQueryFilter(t => !t.isDeleted);
+            modelBuilder.Entity<Plataforma>().HasQueryFilter(p => !p.isDeleted);
+            modelBuilder.Entity<Formato>().HasQueryFilter(f => !f.isDeleted);
             modelBuilder.Entity<Producto>().HasQueryFilter(p => !p.isDeleted);
             modelBuilder.Entity<Venta>().HasQueryFilter(v => !v.isDeleted);
 
@@ -108,6 +125,16 @@ namespace Backend.Data
                 .HasOne(p => p.TipoProducto)
                 .WithMany()
                 .HasForeignKey(p => p.TipoProductoId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Producto>()
+                .HasOne(p => p.Plataforma)
+                .WithMany()
+                .HasForeignKey(p => p.PlataformaId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Producto>()
+                .HasOne(p => p.Formato)
+                .WithMany()
+                .HasForeignKey(p => p.FormatoId)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Venta>()
                 .HasOne(v => v.Cliente)
