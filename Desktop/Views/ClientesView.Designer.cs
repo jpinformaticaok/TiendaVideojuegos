@@ -32,179 +32,305 @@ namespace Desktop.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageLista = new System.Windows.Forms.TabPage();
-            this.tabPageAgregarEditar = new System.Windows.Forms.TabPage();
-            this.dataGridClientes = new System.Windows.Forms.DataGridView();
-            this.txtBusqueda = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnNuevo = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
-            this.btnEliminar = new FontAwesome.Sharp.IconButton();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtDni = new System.Windows.Forms.TextBox();
-            this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
-            this.SuspendLayout();
-            this.Text = "Clientes";
-            this.ClientSize = new Size(800, 450);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Name = "ClientesView";
-            this.label1.AutoSize = true;
-            this.label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            this.label1.Location = new Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new Size(176, 30);
-            this.label1.Text = "CRUD - Clientes";
-            this.tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.tabControl.Controls.Add(this.tabPageLista);
-            this.tabControl.Controls.Add(this.tabPageAgregarEditar);
-            this.tabControl.Location = new Point(12, 59);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new Size(776, 379);
-            this.tabPageLista.Text = "Lista";
-            this.tabPageLista.UseVisualStyleBackColor = true;
-            this.label2.AutoSize = true;
-            this.label2.Location = new Point(6, 21);
-            this.label2.Text = "Buscar";
-            this.txtBusqueda.Location = new Point(54, 21);
-            this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new Size(578, 23);
-            this.txtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBusqueda_KeyPress);
-            this.btnBuscar.IconChar = IconChar.Search;
-            this.btnBuscar.IconColor = Color.Black;
-            this.btnBuscar.IconFont = IconFont.Auto;
-            this.btnBuscar.IconSize = 15;
-            this.btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new Point(665, 21);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new Size(75, 23);
-            this.btnBuscar.Text = "   Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            this.dataGridClientes.AllowUserToAddRows = false;
-            this.dataGridClientes.AllowUserToDeleteRows = false;
-            this.dataGridClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridClientes.Location = new Point(6, 59);
-            this.dataGridClientes.Name = "dataGridClientes";
-            this.dataGridClientes.ReadOnly = true;
-            this.dataGridClientes.Size = new Size(626, 286);
-            this.btnNuevo.IconChar = IconChar.Plus;
-            this.btnNuevo.IconColor = Color.Black;
-            this.btnNuevo.IconFont = IconFont.Auto;
-            this.btnNuevo.IconSize = 15;
-            this.btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnNuevo.Location = new Point(665, 72);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new Size(75, 23);
-            this.btnNuevo.Text = " Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            this.btnModificar.IconChar = IconChar.Pen;
-            this.btnModificar.IconColor = Color.Black;
-            this.btnModificar.IconFont = IconFont.Auto;
-            this.btnModificar.IconSize = 15;
-            this.btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new Point(665, 128);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new Size(75, 23);
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            this.btnEliminar.IconChar = IconChar.Trash;
-            this.btnEliminar.IconColor = Color.Black;
-            this.btnEliminar.IconFont = IconFont.Auto;
-            this.btnEliminar.IconSize = 15;
-            this.btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new Point(665, 176);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new Size(75, 23);
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            this.tabPageLista.Controls.Add(this.btnEliminar);
-            this.tabPageLista.Controls.Add(this.btnModificar);
-            this.tabPageLista.Controls.Add(this.btnNuevo);
-            this.tabPageLista.Controls.Add(this.btnBuscar);
-            this.tabPageLista.Controls.Add(this.txtBusqueda);
-            this.tabPageLista.Controls.Add(this.label2);
-            this.tabPageLista.Controls.Add(this.dataGridClientes);
-            this.tabPageAgregarEditar.Text = "Agregar / Editar";
-            this.tabPageAgregarEditar.UseVisualStyleBackColor = true;
-            this.label3.AutoSize = true;
-            this.label3.Location = new Point(46, 50);
-            this.label3.Text = "Nombre";
-            this.txtNombre.Location = new Point(120, 42);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new Size(513, 23);
-            this.label4.AutoSize = true;
-            this.label4.Location = new Point(46, 133);
-            this.label4.Text = "Apellido";
-            this.txtApellido.Location = new Point(120, 130);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new Size(513, 23);
-            this.label5.AutoSize = true;
-            this.label5.Location = new Point(70, 212);
-            this.label5.Text = "DNI";
-            this.txtDni.Location = new Point(120, 209);
-            this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new Size(513, 23);
-            this.label6.AutoSize = true;
-            this.label6.Location = new Point(40, 289);
-            this.label6.Text = "Direccion";
-            this.txtDireccion.Location = new Point(120, 281);
-            this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new Size(513, 23);
-            this.btnGuardar.IconChar = IconChar.Save;
-            this.btnGuardar.IconColor = Color.Black;
-            this.btnGuardar.IconFont = IconFont.Auto;
-            this.btnGuardar.IconSize = 15;
-            this.btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new Point(674, 87);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new Size(75, 23);
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            this.btnCancelar.IconChar = IconChar.Cancel;
-            this.btnCancelar.IconColor = Color.Black;
-            this.btnCancelar.IconFont = IconFont.Auto;
-            this.btnCancelar.IconSize = 15;
-            this.btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new Point(674, 182);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new Size(75, 23);
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            this.tabPageAgregarEditar.Controls.Add(this.txtDireccion);
-            this.tabPageAgregarEditar.Controls.Add(this.txtDni);
-            this.tabPageAgregarEditar.Controls.Add(this.txtApellido);
-            this.tabPageAgregarEditar.Controls.Add(this.txtNombre);
-            this.tabPageAgregarEditar.Controls.Add(this.label6);
-            this.tabPageAgregarEditar.Controls.Add(this.label5);
-            this.tabPageAgregarEditar.Controls.Add(this.label4);
-            this.tabPageAgregarEditar.Controls.Add(this.label3);
-            this.tabPageAgregarEditar.Controls.Add(this.btnCancelar);
-            this.tabPageAgregarEditar.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.label1);
-            this.ResumeLayout(false);
+            tabControl = new TabControl();
+            tabPageLista = new TabPage();
+            btnEliminar = new IconButton();
+            btnModificar = new IconButton();
+            btnNuevo = new IconButton();
+            btnBuscar = new IconButton();
+            txtBusqueda = new TextBox();
+            label2 = new Label();
+            dataGridClientes = new DataGridView();
+            tabPageAgregarEditar = new TabPage();
+            txtDireccion = new TextBox();
+            txtDni = new TextBox();
+            txtApellido = new TextBox();
+            txtNombre = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            btnCancelar = new IconButton();
+            btnGuardar = new IconButton();
+            panelTitulo = new Panel();
+            lblTitulo = new Label();
+            tabControl.SuspendLayout();
+            tabPageLista.SuspendLayout();
+            ((ISupportInitialize)dataGridClientes).BeginInit();
+            tabPageAgregarEditar.SuspendLayout();
+            panelTitulo.SuspendLayout();
+            SuspendLayout();
+            // 
+            // tabControl
+            // 
+            tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl.Controls.Add(tabPageLista);
+            tabControl.Controls.Add(tabPageAgregarEditar);
+            tabControl.Location = new Point(12, 76);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(776, 399);
+            tabControl.TabIndex = 0;
+            // 
+            // tabPageLista
+            // 
+            tabPageLista.Controls.Add(btnEliminar);
+            tabPageLista.Controls.Add(btnModificar);
+            tabPageLista.Controls.Add(btnNuevo);
+            tabPageLista.Controls.Add(btnBuscar);
+            tabPageLista.Controls.Add(txtBusqueda);
+            tabPageLista.Controls.Add(label2);
+            tabPageLista.Controls.Add(dataGridClientes);
+            tabPageLista.Location = new Point(4, 24);
+            tabPageLista.Name = "tabPageLista";
+            tabPageLista.Size = new Size(768, 371);
+            tabPageLista.TabIndex = 0;
+            tabPageLista.Text = "Lista";
+            tabPageLista.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.IconChar = IconChar.Trash;
+            btnEliminar.IconColor = Color.Black;
+            btnEliminar.IconFont = IconFont.Auto;
+            btnEliminar.IconSize = 15;
+            btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEliminar.Location = new Point(654, 176);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(101, 23);
+            btnEliminar.TabIndex = 0;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // btnModificar
+            // 
+            btnModificar.IconChar = IconChar.Pen;
+            btnModificar.IconColor = Color.Black;
+            btnModificar.IconFont = IconFont.Auto;
+            btnModificar.IconSize = 15;
+            btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnModificar.Location = new Point(654, 128);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(101, 23);
+            btnModificar.TabIndex = 1;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
+            // 
+            // btnNuevo
+            // 
+            btnNuevo.IconChar = IconChar.Add;
+            btnNuevo.IconColor = Color.Black;
+            btnNuevo.IconFont = IconFont.Auto;
+            btnNuevo.IconSize = 15;
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(654, 72);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(101, 23);
+            btnNuevo.TabIndex = 2;
+            btnNuevo.Text = " Nuevo";
+            btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.IconChar = IconChar.Search;
+            btnBuscar.IconColor = Color.Black;
+            btnBuscar.IconFont = IconFont.Auto;
+            btnBuscar.IconSize = 15;
+            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBuscar.Location = new Point(654, 21);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(101, 23);
+            btnBuscar.TabIndex = 3;
+            btnBuscar.Text = "   Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // txtBusqueda
+            // 
+            txtBusqueda.Location = new Point(54, 21);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(578, 23);
+            txtBusqueda.TabIndex = 4;
+            txtBusqueda.KeyPress += txtBusqueda_KeyPress;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 21);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Buscar";
+            // 
+            // dataGridClientes
+            // 
+            dataGridClientes.AllowUserToAddRows = false;
+            dataGridClientes.AllowUserToDeleteRows = false;
+            dataGridClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridClientes.Location = new Point(6, 59);
+            dataGridClientes.Name = "dataGridClientes";
+            dataGridClientes.ReadOnly = true;
+            dataGridClientes.Size = new Size(626, 286);
+            dataGridClientes.TabIndex = 6;
+            // 
+            // tabPageAgregarEditar
+            // 
+            tabPageAgregarEditar.Controls.Add(txtDireccion);
+            tabPageAgregarEditar.Controls.Add(txtDni);
+            tabPageAgregarEditar.Controls.Add(txtApellido);
+            tabPageAgregarEditar.Controls.Add(txtNombre);
+            tabPageAgregarEditar.Controls.Add(label6);
+            tabPageAgregarEditar.Controls.Add(label5);
+            tabPageAgregarEditar.Controls.Add(label4);
+            tabPageAgregarEditar.Controls.Add(label3);
+            tabPageAgregarEditar.Controls.Add(btnCancelar);
+            tabPageAgregarEditar.Controls.Add(btnGuardar);
+            tabPageAgregarEditar.Location = new Point(4, 24);
+            tabPageAgregarEditar.Name = "tabPageAgregarEditar";
+            tabPageAgregarEditar.Size = new Size(768, 371);
+            tabPageAgregarEditar.TabIndex = 1;
+            tabPageAgregarEditar.Text = "Agregar / Editar";
+            tabPageAgregarEditar.UseVisualStyleBackColor = true;
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(120, 281);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(513, 23);
+            txtDireccion.TabIndex = 0;
+            // 
+            // txtDni
+            // 
+            txtDni.Location = new Point(120, 209);
+            txtDni.Name = "txtDni";
+            txtDni.Size = new Size(513, 23);
+            txtDni.TabIndex = 1;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Location = new Point(120, 130);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(513, 23);
+            txtApellido.TabIndex = 2;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(120, 42);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(513, 23);
+            txtNombre.TabIndex = 3;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(40, 289);
+            label6.Name = "label6";
+            label6.Size = new Size(57, 15);
+            label6.TabIndex = 4;
+            label6.Text = "Dirección";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(70, 212);
+            label5.Name = "label5";
+            label5.Size = new Size(27, 15);
+            label5.TabIndex = 5;
+            label5.Text = "DNI";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(46, 133);
+            label4.Name = "label4";
+            label4.Size = new Size(51, 15);
+            label4.TabIndex = 6;
+            label4.Text = "Apellido";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(46, 50);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Nombre";
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.IconChar = IconChar.Cancel;
+            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconFont = IconFont.Auto;
+            btnCancelar.IconSize = 15;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(666, 182);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(83, 23);
+            btnCancelar.TabIndex = 8;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.IconChar = IconChar.Save;
+            btnGuardar.IconColor = Color.Black;
+            btnGuardar.IconFont = IconFont.Auto;
+            btnGuardar.IconSize = 15;
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(666, 87);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(83, 23);
+            btnGuardar.TabIndex = 9;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // panelTitulo
+            // 
+            panelTitulo.BackColor = Color.FromArgb(30, 30, 50);
+            panelTitulo.Controls.Add(lblTitulo);
+            panelTitulo.Dock = DockStyle.Top;
+            panelTitulo.Location = new Point(0, 0);
+            panelTitulo.Name = "panelTitulo";
+            panelTitulo.Size = new Size(800, 70);
+            panelTitulo.TabIndex = 1;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(120, 180, 255);
+            lblTitulo.Location = new Point(20, 12);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(176, 30);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "CRUD - Clientes";
+            // 
+            // ClientesView
+            // 
+            ClientSize = new Size(800, 487);
+            Controls.Add(panelTitulo);
+            Controls.Add(tabControl);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Name = "ClientesView";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Clientes";
+            tabControl.ResumeLayout(false);
+            tabPageLista.ResumeLayout(false);
+            tabPageLista.PerformLayout();
+            ((ISupportInitialize)dataGridClientes).EndInit();
+            tabPageAgregarEditar.ResumeLayout(false);
+            tabPageAgregarEditar.PerformLayout();
+            panelTitulo.ResumeLayout(false);
+            panelTitulo.PerformLayout();
+            ResumeLayout(false);
         }
 
-
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageLista;
         private System.Windows.Forms.TabPage tabPageAgregarEditar;
@@ -225,5 +351,7 @@ namespace Desktop.Views
         private System.Windows.Forms.Label label6;
         private FontAwesome.Sharp.IconButton btnGuardar;
         private FontAwesome.Sharp.IconButton btnCancelar;
+        private Panel panelTitulo;
+        private Label lblTitulo;
     }
 }

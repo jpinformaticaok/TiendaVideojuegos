@@ -32,147 +32,256 @@ namespace Desktop.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageLista = new System.Windows.Forms.TabPage();
-            this.tabPageAgregarEditar = new System.Windows.Forms.TabPage();
-            this.dataGridTipos = new System.Windows.Forms.DataGridView();
-            this.txtBusqueda = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnNuevo = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
-            this.btnEliminar = new FontAwesome.Sharp.IconButton();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnGuardar = new FontAwesome.Sharp.IconButton();
-            this.btnCancelar = new FontAwesome.Sharp.IconButton();
-            this.SuspendLayout();
-            this.Text = "Tipos de Producto";
-            this.ClientSize = new Size(800, 450);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Name = "TiposProductoView";
-            this.label1.AutoSize = true;
-            this.label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            this.label1.Location = new Point(12, 9);
-            this.label1.Text = "CRUD - Tipos de Producto";
-            this.tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.tabControl.Controls.Add(this.tabPageLista);
-            this.tabControl.Controls.Add(this.tabPageAgregarEditar);
-            this.tabControl.Location = new Point(12, 59);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new Size(776, 379);
-            this.tabPageLista.Text = "Lista";
-            this.tabPageLista.UseVisualStyleBackColor = true;
-            this.label2.AutoSize = true;
-            this.label2.Location = new Point(6, 21);
-            this.label2.Text = "Buscar";
-            this.txtBusqueda.Location = new Point(54, 21);
-            this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new Size(578, 23);
-            this.txtBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBusqueda_KeyPress);
-            this.btnBuscar.IconChar = IconChar.Search;
-            this.btnBuscar.IconColor = Color.Black;
-            this.btnBuscar.IconFont = IconFont.Auto;
-            this.btnBuscar.IconSize = 15;
-            this.btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new Point(665, 21);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new Size(75, 23);
-            this.btnBuscar.Text = "   Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            this.dataGridTipos.AllowUserToAddRows = false;
-            this.dataGridTipos.AllowUserToDeleteRows = false;
-            this.dataGridTipos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTipos.Location = new Point(6, 59);
-            this.dataGridTipos.Name = "dataGridTipos";
-            this.dataGridTipos.ReadOnly = true;
-            this.dataGridTipos.Size = new Size(626, 286);
-            this.btnNuevo.IconChar = IconChar.Plus;
-            this.btnNuevo.IconColor = Color.Black;
-            this.btnNuevo.IconFont = IconFont.Auto;
-            this.btnNuevo.IconSize = 15;
-            this.btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnNuevo.Location = new Point(665, 72);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new Size(75, 23);
-            this.btnNuevo.Text = " Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            this.btnModificar.IconChar = IconChar.Pen;
-            this.btnModificar.IconColor = Color.Black;
-            this.btnModificar.IconFont = IconFont.Auto;
-            this.btnModificar.IconSize = 15;
-            this.btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new Point(665, 128);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new Size(75, 23);
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            this.btnEliminar.IconChar = IconChar.Trash;
-            this.btnEliminar.IconColor = Color.Black;
-            this.btnEliminar.IconFont = IconFont.Auto;
-            this.btnEliminar.IconSize = 15;
-            this.btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new Point(665, 176);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new Size(75, 23);
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            this.tabPageLista.Controls.Add(this.btnEliminar);
-            this.tabPageLista.Controls.Add(this.btnModificar);
-            this.tabPageLista.Controls.Add(this.btnNuevo);
-            this.tabPageLista.Controls.Add(this.btnBuscar);
-            this.tabPageLista.Controls.Add(this.txtBusqueda);
-            this.tabPageLista.Controls.Add(this.label2);
-            this.tabPageLista.Controls.Add(this.dataGridTipos);
-            this.tabPageAgregarEditar.Text = "Agregar / Editar";
-            this.tabPageAgregarEditar.UseVisualStyleBackColor = true;
-            this.label3.AutoSize = true;
-            this.label3.Location = new Point(46, 50);
-            this.label3.Text = "Nombre";
-            this.txtNombre.Location = new Point(120, 42);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new Size(513, 23);
-            this.btnGuardar.IconChar = IconChar.Save;
-            this.btnGuardar.IconColor = Color.Black;
-            this.btnGuardar.IconFont = IconFont.Auto;
-            this.btnGuardar.IconSize = 15;
-            this.btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new Point(674, 87);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new Size(75, 23);
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            this.btnCancelar.IconChar = IconChar.Cancel;
-            this.btnCancelar.IconColor = Color.Black;
-            this.btnCancelar.IconFont = IconFont.Auto;
-            this.btnCancelar.IconSize = 15;
-            this.btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new Point(674, 182);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new Size(75, 23);
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            this.tabPageAgregarEditar.Controls.Add(this.txtNombre);
-            this.tabPageAgregarEditar.Controls.Add(this.label3);
-            this.tabPageAgregarEditar.Controls.Add(this.btnCancelar);
-            this.tabPageAgregarEditar.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.label1);
-            this.ResumeLayout(false);
+            tabControl = new TabControl();
+            tabPageLista = new TabPage();
+            btnEliminar = new IconButton();
+            btnModificar = new IconButton();
+            btnNuevo = new IconButton();
+            btnBuscar = new IconButton();
+            txtBusqueda = new TextBox();
+            label2 = new Label();
+            dataGridTipos = new DataGridView();
+            tabPageAgregarEditar = new TabPage();
+            txtNombre = new TextBox();
+            label3 = new Label();
+            btnCancelar = new IconButton();
+            btnGuardar = new IconButton();
+            panelTitulo = new Panel();
+            lblTitulo = new Label();
+            lblSubtitulo = new Label();
+            tabControl.SuspendLayout();
+            tabPageLista.SuspendLayout();
+            ((ISupportInitialize)dataGridTipos).BeginInit();
+            tabPageAgregarEditar.SuspendLayout();
+            panelTitulo.SuspendLayout();
+            SuspendLayout();
+            // 
+            // tabControl
+            // 
+            tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl.Controls.Add(tabPageLista);
+            tabControl.Controls.Add(tabPageAgregarEditar);
+            tabControl.Location = new Point(12, 76);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(776, 379);
+            tabControl.TabIndex = 0;
+            // 
+            // tabPageLista
+            // 
+            tabPageLista.Controls.Add(btnEliminar);
+            tabPageLista.Controls.Add(btnModificar);
+            tabPageLista.Controls.Add(btnNuevo);
+            tabPageLista.Controls.Add(btnBuscar);
+            tabPageLista.Controls.Add(txtBusqueda);
+            tabPageLista.Controls.Add(label2);
+            tabPageLista.Controls.Add(dataGridTipos);
+            tabPageLista.Location = new Point(4, 24);
+            tabPageLista.Name = "tabPageLista";
+            tabPageLista.Size = new Size(768, 351);
+            tabPageLista.TabIndex = 0;
+            tabPageLista.Text = "Lista";
+            tabPageLista.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.IconChar = IconChar.Trash;
+            btnEliminar.IconColor = Color.Black;
+            btnEliminar.IconFont = IconFont.Auto;
+            btnEliminar.IconSize = 15;
+            btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEliminar.Location = new Point(665, 176);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(90, 23);
+            btnEliminar.TabIndex = 0;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // btnModificar
+            // 
+            btnModificar.IconChar = IconChar.Pen;
+            btnModificar.IconColor = Color.Black;
+            btnModificar.IconFont = IconFont.Auto;
+            btnModificar.IconSize = 15;
+            btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnModificar.Location = new Point(665, 128);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(90, 23);
+            btnModificar.TabIndex = 1;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
+            // 
+            // btnNuevo
+            // 
+            btnNuevo.IconChar = IconChar.Add;
+            btnNuevo.IconColor = Color.Black;
+            btnNuevo.IconFont = IconFont.Auto;
+            btnNuevo.IconSize = 15;
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(665, 72);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(90, 23);
+            btnNuevo.TabIndex = 2;
+            btnNuevo.Text = " Nuevo";
+            btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.IconChar = IconChar.Search;
+            btnBuscar.IconColor = Color.Black;
+            btnBuscar.IconFont = IconFont.Auto;
+            btnBuscar.IconSize = 15;
+            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBuscar.Location = new Point(665, 21);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(90, 23);
+            btnBuscar.TabIndex = 3;
+            btnBuscar.Text = "   Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // txtBusqueda
+            // 
+            txtBusqueda.Location = new Point(54, 21);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(578, 23);
+            txtBusqueda.TabIndex = 4;
+            txtBusqueda.KeyPress += txtBusqueda_KeyPress;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 21);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Buscar";
+            // 
+            // dataGridTipos
+            // 
+            dataGridTipos.AllowUserToAddRows = false;
+            dataGridTipos.AllowUserToDeleteRows = false;
+            dataGridTipos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridTipos.Location = new Point(6, 59);
+            dataGridTipos.Name = "dataGridTipos";
+            dataGridTipos.ReadOnly = true;
+            dataGridTipos.Size = new Size(626, 286);
+            dataGridTipos.TabIndex = 6;
+            // 
+            // tabPageAgregarEditar
+            // 
+            tabPageAgregarEditar.Controls.Add(txtNombre);
+            tabPageAgregarEditar.Controls.Add(label3);
+            tabPageAgregarEditar.Controls.Add(btnCancelar);
+            tabPageAgregarEditar.Controls.Add(btnGuardar);
+            tabPageAgregarEditar.Location = new Point(4, 24);
+            tabPageAgregarEditar.Name = "tabPageAgregarEditar";
+            tabPageAgregarEditar.Size = new Size(768, 351);
+            tabPageAgregarEditar.TabIndex = 1;
+            tabPageAgregarEditar.Text = "Agregar / Editar";
+            tabPageAgregarEditar.UseVisualStyleBackColor = true;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(120, 42);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(513, 23);
+            txtNombre.TabIndex = 0;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(46, 50);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 15);
+            label3.TabIndex = 1;
+            label3.Text = "Nombre";
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.IconChar = IconChar.Cancel;
+            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconFont = IconFont.Auto;
+            btnCancelar.IconSize = 15;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(674, 182);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 2;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.IconChar = IconChar.Save;
+            btnGuardar.IconColor = Color.Black;
+            btnGuardar.IconFont = IconFont.Auto;
+            btnGuardar.IconSize = 15;
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(674, 87);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.TabIndex = 3;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // panelTitulo
+            // 
+            panelTitulo.BackColor = Color.FromArgb(30, 30, 50);
+            panelTitulo.Controls.Add(lblTitulo);
+            panelTitulo.Controls.Add(lblSubtitulo);
+            panelTitulo.Dock = DockStyle.Top;
+            panelTitulo.Location = new Point(0, 0);
+            panelTitulo.Name = "panelTitulo";
+            panelTitulo.Size = new Size(800, 70);
+            panelTitulo.TabIndex = 1;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(120, 180, 255);
+            lblTitulo.Location = new Point(20, 12);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(284, 30);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "CRUD - Tipos de Producto";
+            // 
+            // lblSubtitulo
+            // 
+            lblSubtitulo.AutoSize = true;
+            lblSubtitulo.ForeColor = Color.White;
+            lblSubtitulo.Location = new Point(23, 44);
+            lblSubtitulo.Name = "lblSubtitulo";
+            lblSubtitulo.Size = new Size(201, 15);
+            lblSubtitulo.TabIndex = 1;
+            lblSubtitulo.Text = "Registro con Firebase Authentication";
+            // 
+            // TiposProductoView
+            // 
+            ClientSize = new Size(800, 466);
+            Controls.Add(panelTitulo);
+            Controls.Add(tabControl);
+            Name = "TiposProductoView";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Tipos de Producto";
+            tabControl.ResumeLayout(false);
+            tabPageLista.ResumeLayout(false);
+            tabPageLista.PerformLayout();
+            ((ISupportInitialize)dataGridTipos).EndInit();
+            tabPageAgregarEditar.ResumeLayout(false);
+            tabPageAgregarEditar.PerformLayout();
+            panelTitulo.ResumeLayout(false);
+            panelTitulo.PerformLayout();
+            ResumeLayout(false);
         }
 
-
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageLista;
         private System.Windows.Forms.TabPage tabPageAgregarEditar;
@@ -187,5 +296,8 @@ namespace Desktop.Views
         private System.Windows.Forms.Label label3;
         private FontAwesome.Sharp.IconButton btnGuardar;
         private FontAwesome.Sharp.IconButton btnCancelar;
+        private Panel panelTitulo;
+        private Label lblTitulo;
+        private Label lblSubtitulo;
     }
 }

@@ -15,33 +15,12 @@ namespace Desktop.Views
         public IniciarSesionView()
         {
             InitializeComponent();
-            pictureBox1.Image = CrearLogo();
             EnvConfig.Cargar();
             authDomain = Environment.GetEnvironmentVariable("AUTHDOMAINFB");
             apiKey = Environment.GetEnvironmentVariable("APIKEYFIREBASE");
             ConfiguracionFirebaseAuthClient();
         }
-
         
-
-        private Image CrearLogo()
-        {
-            var bmp = new Bitmap(313, 286);
-            using (var g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.FromArgb(30, 30, 50));
-                using var brush = new SolidBrush(Color.FromArgb(120, 180, 255));
-                using var font = new Font("Segoe UI", 24F, FontStyle.Bold);
-                using var font2 = new Font("Segoe UI", 12F, FontStyle.Regular);
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                g.DrawString("TIENDA", font, brush, new RectangleF(0, 70, 313, 50), sf);
-                g.DrawString("VIDEOJUEGOS", font2, Brushes.White, new RectangleF(0, 125, 313, 40), sf);
-                using var pen = new Pen(Color.FromArgb(120, 180, 255), 3);
-                g.DrawRectangle(pen, 55, 190, 203, 35);
-            }
-            return bmp;
-        }
-
         private void ConfiguracionFirebaseAuthClient()
         {
             if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(authDomain))

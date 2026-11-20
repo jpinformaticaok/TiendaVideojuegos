@@ -13,29 +13,9 @@ namespace Desktop.Views
         public SplashView()
         {
             InitializeComponent();
-            pictureBox1.Image = CrearImagenSplash();
         }
 
         
-
-        private Image CrearImagenSplash()
-        {
-            var bmp = new Bitmap(478, 331);
-            using (var g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.FromArgb(30, 30, 50));
-                using var brush = new SolidBrush(Color.FromArgb(120, 180, 255));
-                using var font = new Font("Segoe UI", 34F, FontStyle.Bold);
-                using var font2 = new Font("Segoe UI", 18F, FontStyle.Regular);
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                g.DrawString("VIDEOJUEGOS", font, brush, new RectangleF(0, 80, 478, 80), sf);
-                g.DrawString("Consolas · Juegos · Suscripciones", font2, Brushes.White, new RectangleF(0, 170, 478, 60), sf);
-                using var pen = new Pen(Color.FromArgb(120, 180, 255), 4);
-                g.DrawRectangle(pen, 120, 250, 238, 40);
-            }
-            return bmp;
-        }
-
         private void timer1_Tick(object? sender, EventArgs e)
         {
             if (pbSplash.Value < 98)
