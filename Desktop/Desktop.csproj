@@ -23,6 +23,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Reports\Clientes.rdlc" />
     <EmbeddedResource Include="Reports\Productos.rdlc" />
+    <EmbeddedResource Include="Reports\ProductosFiltrados.rdlc" />
+    <EmbeddedResource Include="Reports\ProductosAgrupados.rdlc" />
+    <EmbeddedResource Include="Reports\VentaComprobante.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +78,15 @@
     <Compile Update="ViewReports\ProductosViewReport.cs"><SubType>Form</SubType></Compile>
     <Compile Update="ViewReports\ProductosViewReport.Designer.cs"><DependentUpon>ProductosViewReport.cs</DependentUpon></Compile>
     <EmbeddedResource Update="ViewReports\ProductosViewReport.resx"><DependentUpon>ProductosViewReport.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="ViewReports\ProductosFiltradosViewReport.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="ViewReports\ProductosFiltradosViewReport.Designer.cs"><DependentUpon>ProductosFiltradosViewReport.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="ViewReports\ProductosFiltradosViewReport.resx"><DependentUpon>ProductosFiltradosViewReport.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="ViewReports\ProductosAgrupadosViewReport.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="ViewReports\ProductosAgrupadosViewReport.Designer.cs"><DependentUpon>ProductosAgrupadosViewReport.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="ViewReports\ProductosAgrupadosViewReport.resx"><DependentUpon>ProductosAgrupadosViewReport.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="ViewReports\VentaComprobanteViewReport.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="ViewReports\VentaComprobanteViewReport.Designer.cs"><DependentUpon>VentaComprobanteViewReport.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="ViewReports\VentaComprobanteViewReport.resx"><DependentUpon>VentaComprobanteViewReport.cs</DependentUpon></EmbeddedResource>
   </ItemGroup>
 
 </Project>

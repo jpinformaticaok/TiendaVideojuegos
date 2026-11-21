@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="DSProductosFiltrados">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>00000000-0000-0000-0000-000000000011</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DSProductosFiltrados">
+      <Fields>
+        <Field Name="id"><DataField>id</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Name"><DataField>Name</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Tipo"><DataField>Tipo</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Platform"><DataField>Platform</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Format"><DataField>Format</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Price"><DataField>Price</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+        <Field Name="Stock"><DataField>Stock</DataField><rd:TypeName>System.Int32</rd:TypeName></Field>
+        <Field Name="Valor"><DataField>Valor</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+        <Field Name="Filtro"><DataField>Filtro</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DSProductosFiltrados</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Textbox Name="TituloProductosFiltrados">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Reporte de Productos Filtrado</Value>
+                <Style>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TituloProductosFiltrados</rd:DefaultName>
+        <Top>0in</Top>
+        <Left>0in</Left>
+        <Height>0.32in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="SubtituloFiltros">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Filtro.Value, "DSProductosFiltrados")</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Color>#4B5563</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>SubtituloFiltros</rd:DefaultName>
+        <Top>0.34in</Top>
+        <Left>0in</Left>
+        <Height>0.24in</Height>
+        <Width>5.2in</Width>
+      </Textbox>
+      <Textbox Name="FechaEmision">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Emitido: " &amp; Format(Globals!ExecutionTime, "dd/MM/yyyy HH:mm")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Color>#6B7280</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>FechaEmision</rd:DefaultName>
+        <Top>0.34in</Top>
+        <Left>5.2in</Left>
+        <Height>0.24in</Height>
+        <Width>2.3in</Width>
+      </Textbox>
+      <Tablix Name="TablaProductosFiltrados">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>0.4in</Width></TablixColumn>
+            <TablixColumn><Width>2.2in</Width></TablixColumn>
+            <TablixColumn><Width>0.85in</Width></TablixColumn>
+            <TablixColumn><Width>0.95in</Width></TablixColumn>
+            <TablixColumn><Width>0.75in</Width></TablixColumn>
+            <TablixColumn><Width>0.85in</Width></TablixColumn>
+            <TablixColumn><Width>0.55in</Width></TablixColumn>
+            <TablixColumn><Width>0.9in</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.3in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfId">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>ID</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfId</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfNombre">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Nombre</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfNombre</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfTipo">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Tipo</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfTipo</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfPlataforma">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Plataforma</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfPlataforma</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfFormato">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Formato</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfFormato</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfPrecio">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Precio</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfPrecio</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfStock">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Stock</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfStock</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hfValor">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Valor stock</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>hfValor</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfId">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!id.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfId</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfNombre">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Name.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfNombre</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfTipo">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Tipo.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfTipo</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfPlataforma">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Platform.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfPlataforma</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfFormato">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Format.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfFormato</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfPrecio">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!Price.Value, "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfPrecio</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfStock">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Stock.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfStock</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dfValor">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!Valor.Value, "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>dfValor</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.3in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="tfEtiqueta">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><FontWeight>Bold</FontWeight><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>tfEtiqueta</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="tfCantidad">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><FontWeight>Bold</FontWeight><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>="TOTAL (" &amp; Count(Fields!id.Value) &amp; ")"</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>tfCantidad</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell><CellContents><Textbox Name="tfVacio1"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>tfVacio1</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="tfVacio2"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>tfVacio2</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="tfVacio3"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>tfVacio3</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="tfVacio4"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>tfVacio4</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="tfStock">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><FontWeight>Bold</FontWeight><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Sum(Fields!Stock.Value)</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>tfStock</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="tfValor">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><FontWeight>Bold</FontWeight><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Sum(Fields!Valor.Value), "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>tfValor</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="DetalleProductosFiltrados">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!id.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+            <TablixMember />
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DSProductosFiltrados</DataSetName>
+        <Top>0.65in</Top>
+        <Left>0in</Left>
+        <Height>0.85in</Height>
+        <Width>7.5in</Width>
+        <Style><Border><Style>None</Style></Border></Style>
+      </Tablix>
+    </ReportItems>
+    <Height>7.5in</Height>
+  </Body>
+  <Width>7.5in</Width>
+  <Page>
+    <PageHeight>11in</PageHeight>
+    <PageWidth>8.5in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
+    <PageFooter>
+      <Height>0.3in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="PieProductosFiltrados">
+          <CanGrow>true</CanGrow>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Pagina " &amp; Globals!PageNumber &amp; " de " &amp; Globals!TotalPages</Value>
+                  <Style><FontSize>8pt</FontSize><Color>#6B7280</Color></Style>
+                </TextRun>
+              </TextRuns>
+              <Style><TextAlign>Center</TextAlign></Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>PieProductosFiltrados</rd:DefaultName>
+          <Top>0.05in</Top>
+          <Height>0.2in</Height>
+          <Width>7.5in</Width>
+        </Textbox>
+      </ReportItems>
+      <Style />
+    </PageFooter>
+  </Page>
+</Report>

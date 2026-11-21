@@ -49,6 +49,16 @@ namespace Desktop.Views
             new ProductosViewReport().ShowDialog();
         }
 
+        private void subMenuProductosFiltrados_Click(object? sender, EventArgs e)
+        {
+            new ProductosFiltradosViewReport().ShowDialog();
+        }
+
+        private void subMenuProductosAgrupados_Click(object? sender, EventArgs e)
+        {
+            new ProductosAgrupadosViewReport().ShowDialog();
+        }
+
         private void SubMenuSalirDelSistema_Click(object? sender, EventArgs e)
         {
             Application.Exit();

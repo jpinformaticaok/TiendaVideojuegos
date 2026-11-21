@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="DSVenta">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>00000000-0000-0000-0000-000000000013</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DSVentaCabecera">
+      <Fields>
+        <Field Name="Numero"><DataField>Numero</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Fecha"><DataField>Fecha</DataField><rd:TypeName>System.DateTime</rd:TypeName></Field>
+        <Field Name="Cliente"><DataField>Cliente</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Dni"><DataField>Dni</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Direccion"><DataField>Direccion</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Localidad"><DataField>Localidad</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Provincia"><DataField>Provincia</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Pais"><DataField>Pais</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Total"><DataField>Total</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DSVenta</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+    </DataSet>
+    <DataSet Name="DSVentaDetalle">
+      <Fields>
+        <Field Name="Linea"><DataField>Linea</DataField><rd:TypeName>System.Int32</rd:TypeName></Field>
+        <Field Name="Producto"><DataField>Producto</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Cantidad"><DataField>Cantidad</DataField><rd:TypeName>System.Int32</rd:TypeName></Field>
+        <Field Name="Precio"><DataField>Precio</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+        <Field Name="Subtotal"><DataField>Subtotal</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DSVenta</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Textbox Name="Empresa">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>TIENDA DE VIDEOJUEGOS</Value>
+                <Style>
+                  <FontSize>18pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#1F2937</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style><TextAlign>Center</TextAlign></Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Empresa</rd:DefaultName>
+        <Top>0in</Top>
+        <Left>0in</Left>
+        <Height>0.4in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="TipoComprobante">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>COMPROBANTE DE VENTA</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#4B5563</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style><TextAlign>Center</TextAlign></Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>0.4in</Top>
+        <Left>0in</Left>
+        <Height>0.28in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="NumeroComprobante">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Comprobante Nro: " &amp; First(Fields!Numero.Value, "DSVentaCabecera")</Value>
+                <Style><FontWeight>Bold</FontWeight></Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>NumeroComprobante</rd:DefaultName>
+        <Top>0.78in</Top>
+        <Left>0in</Left>
+        <Height>0.22in</Height>
+        <Width>3.7in</Width>
+      </Textbox>
+      <Textbox Name="FechaComprobante">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Fecha: " &amp; Format(First(Fields!Fecha.Value, "DSVentaCabecera"), "dd/MM/yyyy HH:mm")</Value>
+              </TextRun>
+            </TextRuns>
+            <Style><TextAlign>Right</TextAlign></Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>FechaComprobante</rd:DefaultName>
+        <Top>0.78in</Top>
+        <Left>3.8in</Left>
+        <Height>0.22in</Height>
+        <Width>3.7in</Width>
+      </Textbox>
+      <Textbox Name="DatosCliente">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Cliente: " &amp; First(Fields!Cliente.Value, "DSVentaCabecera")</Value>
+                <Style><FontWeight>Bold</FontWeight></Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DatosCliente</rd:DefaultName>
+        <Top>1.08in</Top>
+        <Left>0in</Left>
+        <Height>0.22in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="DatosDni">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="DNI: " &amp; First(Fields!Dni.Value, "DSVentaCabecera")</Value>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DatosDni</rd:DefaultName>
+        <Top>1.3in</Top>
+        <Left>0in</Left>
+        <Height>0.22in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="DatosDireccion">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Direccion: " &amp; First(Fields!Direccion.Value, "DSVentaCabecera")</Value>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DatosDireccion</rd:DefaultName>
+        <Top>1.52in</Top>
+        <Left>0in</Left>
+        <Height>0.22in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Textbox Name="DatosUbicacion">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Localidad: " &amp; First(Fields!Localidad.Value, "DSVentaCabecera") &amp; " - " &amp; First(Fields!Provincia.Value, "DSVentaCabecera") &amp; " - " &amp; First(Fields!Pais.Value, "DSVentaCabecera")</Value>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DatosUbicacion</rd:DefaultName>
+        <Top>1.74in</Top>
+        <Left>0in</Left>
+        <Height>0.22in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+      <Tablix Name="TablaComprobante">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>3.7in</Width></TablixColumn>
+            <TablixColumn><Width>0.9in</Width></TablixColumn>
+            <TablixColumn><Width>1.4in</Width></TablixColumn>
+            <TablixColumn><Width>1.5in</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.3in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="chProducto">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Producto</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>chProducto</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="chCantidad">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Cantidad</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>chCantidad</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="chPrecio">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Precio unitario</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>chPrecio</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="chSubtotal">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><BackgroundColor>#DCE3EA</BackgroundColor></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>Subtotal</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>chSubtotal</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cdProducto">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight></Style>
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Producto.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>cdProducto</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cdCantidad">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Cantidad.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>cdCantidad</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cdPrecio">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!Precio.Value, "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>cdPrecio</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="cdSubtotal">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!Subtotal.Value, "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>cdSubtotal</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.3in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ctEtiqueta">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><FontWeight>Bold</FontWeight><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>TOTAL</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>ctEtiqueta</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell><CellContents><Textbox Name="ctVacio1"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>ctVacio1</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="ctVacio2"><Style><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style><Paragraphs><Paragraph><TextRuns><TextRun><Value /></TextRun></TextRuns></Paragraph></Paragraphs><rd:DefaultName>ctVacio2</rd:DefaultName></Textbox></CellContents></TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ctTotal">
+                      <Style><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><TextAlign>Right</TextAlign><FontWeight>Bold</FontWeight><FontSize>11pt</FontSize><BackgroundColor>#E5E7EB</BackgroundColor><Border><Style>None</Style></Border></Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value>="$ " &amp; Format(Sum(Fields!Subtotal.Value, "DSVentaDetalle"), "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs>
+                      <rd:DefaultName>ctTotal</rd:DefaultName>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="DetalleComprobante">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Linea.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+            <TablixMember />
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DSVentaDetalle</DataSetName>
+        <Top>2.08in</Top>
+        <Left>0in</Left>
+        <Height>0.85in</Height>
+        <Width>7.5in</Width>
+        <Style><Border><Style>None</Style></Border></Style>
+      </Tablix>
+      <Textbox Name="PieGracias">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Gracias por su compra</Value>
+                <Style><FontSize>9pt</FontSize><Color>#4B5563</Color></Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>PieGracias</rd:DefaultName>
+        <Top>3.15in</Top>
+        <Left>0in</Left>
+        <Height>0.24in</Height>
+        <Width>7.5in</Width>
+      </Textbox>
+    </ReportItems>
+    <Height>7.5in</Height>
+  </Body>
+  <Width>7.5in</Width>
+  <Page>
+    <PageHeight>11in</PageHeight>
+    <PageWidth>8.5in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
+    <PageFooter>
+      <Height>0.3in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="PieComprobante">
+          <CanGrow>true</CanGrow>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Pagina " &amp; Globals!PageNumber &amp; " de " &amp; Globals!TotalPages</Value>
+                  <Style><FontSize>8pt</FontSize><Color>#6B7280</Color></Style>
+                </TextRun>
+              </TextRuns>
+              <Style><TextAlign>Center</TextAlign></Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>PieComprobante</rd:DefaultName>
+          <Top>0.05in</Top>
+          <Height>0.2in</Height>
+          <Width>7.5in</Width>
+        </Textbox>
+      </ReportItems>
+      <Style />
+    </PageFooter>
+  </Page>
+</Report>

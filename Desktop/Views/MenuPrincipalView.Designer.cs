@@ -43,6 +43,8 @@ namespace Desktop.Views
             subMenuReportes = new IconMenuItem();
             subMenuListadoClientes = new IconMenuItem();
             subMenuListadoProductos = new IconMenuItem();
+            subMenuProductosFiltrados = new IconMenuItem();
+            subMenuProductosAgrupados = new IconMenuItem();
             iconMenuItem2 = new IconMenuItem();
             SubMenuSalirDelSistema = new IconMenuItem();
             menuStrip1.SuspendLayout();
@@ -99,7 +101,7 @@ namespace Desktop.Views
             // 
             // subMenuPlataformas
             // 
-            subMenuPlataformas.IconChar = IconChar.Desktop;
+            subMenuPlataformas.IconChar = IconChar.DesktopAlt;
             subMenuPlataformas.IconColor = Color.Black;
             subMenuPlataformas.IconFont = IconFont.Auto;
             subMenuPlataformas.Name = "subMenuPlataformas";
@@ -129,7 +131,7 @@ namespace Desktop.Views
             // 
             // subMenuReportes
             // 
-            subMenuReportes.DropDownItems.AddRange(new ToolStripItem[] { subMenuListadoClientes, subMenuListadoProductos });
+            subMenuReportes.DropDownItems.AddRange(new ToolStripItem[] { subMenuListadoClientes, subMenuListadoProductos, subMenuProductosFiltrados, subMenuProductosAgrupados });
             subMenuReportes.IconChar = IconChar.Print;
             subMenuReportes.IconColor = Color.Black;
             subMenuReportes.IconFont = IconFont.Auto;
@@ -156,6 +158,26 @@ namespace Desktop.Views
             subMenuListadoProductos.Size = new Size(185, 22);
             subMenuListadoProductos.Text = "Listado de Productos";
             subMenuListadoProductos.Click += subMenuListadoProductos_Click;
+            // 
+            // subMenuProductosFiltrados
+            // 
+            subMenuProductosFiltrados.IconChar = IconChar.Filter;
+            subMenuProductosFiltrados.IconColor = Color.Black;
+            subMenuProductosFiltrados.IconFont = IconFont.Auto;
+            subMenuProductosFiltrados.Name = "subMenuProductosFiltrados";
+            subMenuProductosFiltrados.Size = new Size(185, 22);
+            subMenuProductosFiltrados.Text = "Productos filtrados";
+            subMenuProductosFiltrados.Click += subMenuProductosFiltrados_Click;
+            // 
+            // subMenuProductosAgrupados
+            // 
+            subMenuProductosAgrupados.IconChar = IconChar.ChartBar;
+            subMenuProductosAgrupados.IconColor = Color.Black;
+            subMenuProductosAgrupados.IconFont = IconFont.Auto;
+            subMenuProductosAgrupados.Name = "subMenuProductosAgrupados";
+            subMenuProductosAgrupados.Size = new Size(185, 22);
+            subMenuProductosAgrupados.Text = "Productos agrupados";
+            subMenuProductosAgrupados.Click += subMenuProductosAgrupados_Click;
             // 
             // iconMenuItem2
             // 
@@ -184,6 +206,7 @@ namespace Desktop.Views
             FormBorderStyle = FormBorderStyle.FixedDialog;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "MenuPrincipalView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema de Tienda de Videojuegos - 2do año TSDS";
@@ -207,6 +230,8 @@ namespace Desktop.Views
         private FontAwesome.Sharp.IconMenuItem subMenuReportes;
         private FontAwesome.Sharp.IconMenuItem subMenuListadoClientes;
         private FontAwesome.Sharp.IconMenuItem subMenuListadoProductos;
+        private FontAwesome.Sharp.IconMenuItem subMenuProductosFiltrados;
+        private FontAwesome.Sharp.IconMenuItem subMenuProductosAgrupados;
         private FontAwesome.Sharp.IconMenuItem iconMenuItem2;
         private FontAwesome.Sharp.IconMenuItem SubMenuSalirDelSistema;
     }

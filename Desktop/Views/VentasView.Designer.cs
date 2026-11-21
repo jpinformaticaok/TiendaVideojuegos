@@ -50,6 +50,8 @@ namespace Desktop.Views
             gridItems = new DataGridView();
             lblTotal = new Label();
             btnGuardar = new IconButton();
+            btnImprimir = new IconButton();
+            btnImprimirLista = new IconButton();
             panelTitulo = new Panel();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
@@ -77,11 +79,10 @@ namespace Desktop.Views
             // 
             tabPageLista.Controls.Add(gridDetalle);
             tabPageLista.Controls.Add(labelDetalle);
-            tabPageLista.Controls.Add(btnActualizar);
             tabPageLista.Controls.Add(gridVentas);
             tabPageLista.Location = new Point(4, 24);
             tabPageLista.Name = "tabPageLista";
-            tabPageLista.Size = new Size(768, 393);
+            tabPageLista.Size = new Size(768, 362);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -114,7 +115,7 @@ namespace Desktop.Views
             btnActualizar.IconFont = IconFont.Auto;
             btnActualizar.IconSize = 15;
             btnActualizar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnActualizar.Location = new Point(650, 356);
+            btnActualizar.Location = new Point(666, 472);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.Size = new Size(90, 23);
             btnActualizar.TabIndex = 2;
@@ -147,6 +148,7 @@ namespace Desktop.Views
             tabPageNueva.Controls.Add(gridItems);
             tabPageNueva.Controls.Add(lblTotal);
             tabPageNueva.Controls.Add(btnGuardar);
+            tabPageNueva.Controls.Add(btnImprimir);
             tabPageNueva.Location = new Point(4, 24);
             tabPageNueva.Name = "tabPageNueva";
             tabPageNueva.Size = new Size(768, 362);
@@ -271,6 +273,36 @@ namespace Desktop.Views
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // btnImprimir
+            // 
+            btnImprimir.IconChar = IconChar.Print;
+            btnImprimir.IconColor = Color.Black;
+            btnImprimir.IconFont = IconFont.Auto;
+            btnImprimir.IconSize = 15;
+            btnImprimir.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImprimir.Location = new Point(500, 315);
+            btnImprimir.Name = "btnImprimir";
+            btnImprimir.Size = new Size(112, 30);
+            btnImprimir.TabIndex = 11;
+            btnImprimir.Text = "Imprimir";
+            btnImprimir.UseVisualStyleBackColor = true;
+            btnImprimir.Click += btnImprimir_Click;
+            // 
+            // btnImprimirLista
+            // 
+            btnImprimirLista.IconChar = IconChar.Print;
+            btnImprimirLista.IconColor = Color.Black;
+            btnImprimirLista.IconFont = IconFont.Auto;
+            btnImprimirLista.IconSize = 15;
+            btnImprimirLista.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImprimirLista.Location = new Point(566, 472);
+            btnImprimirLista.Name = "btnImprimirLista";
+            btnImprimirLista.Size = new Size(90, 23);
+            btnImprimirLista.TabIndex = 3;
+            btnImprimirLista.Text = "Imprimir";
+            btnImprimirLista.UseVisualStyleBackColor = true;
+            btnImprimirLista.Click += btnImprimirLista_Click;
+            // 
             // panelTitulo
             // 
             panelTitulo.BackColor = Color.FromArgb(30, 30, 50);
@@ -305,9 +337,13 @@ namespace Desktop.Views
             // 
             // VentasView
             // 
-            ClientSize = new Size(800, 484);
+            ClientSize = new Size(800, 508);
             Controls.Add(panelTitulo);
             Controls.Add(tabControl);
+            Controls.Add(btnActualizar);
+            Controls.Add(btnImprimirLista);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "VentasView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ventas";
@@ -342,6 +378,8 @@ namespace Desktop.Views
         private FontAwesome.Sharp.IconButton btnAgregar;
         private FontAwesome.Sharp.IconButton btnQuitar;
         private FontAwesome.Sharp.IconButton btnGuardar;
+        private FontAwesome.Sharp.IconButton btnImprimir;
+        private FontAwesome.Sharp.IconButton btnImprimirLista;
         private System.Windows.Forms.DataGridView gridItems;
         private Panel panelTitulo;
         private Label lblTitulo;

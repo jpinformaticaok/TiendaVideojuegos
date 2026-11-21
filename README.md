@@ -47,6 +47,9 @@ editar visualmente en Visual Studio 2022:
 | `VentasView` | `Desktop/Views/VentasView.cs` + `.Designer.cs` + `.resx` |
 | `ClientesViewReport` | `Desktop/ViewReports/ClientesViewReport.cs` + `.Designer.cs` + `.resx` |
 | `ProductosViewReport` | `Desktop/ViewReports/ProductosViewReport.cs` + `.Designer.cs` + `.resx` |
+| `ProductosFiltradosViewReport` | `Desktop/ViewReports/ProductosFiltradosViewReport.cs` + `.Designer.cs` + `.resx` |
+| `ProductosAgrupadosViewReport` | `Desktop/ViewReports/ProductosAgrupadosViewReport.cs` + `.Designer.cs` + `.resx` |
+| `VentaComprobanteViewReport` | `Desktop/ViewReports/VentaComprobanteViewReport.cs` + `.Designer.cs` + `.resx` |
 
 - Para abrir el diseñador: clic derecho sobre el `.cs` → **Ver diseñador** (o `Shift+F7`).
 - El `.Designer.cs` contiene `InitializeComponent()` y las declaraciones de los controles: se edita
@@ -82,6 +85,39 @@ Contraseña: Tienda1234
 
 También se pueden crear usuarios nuevos desde el botón **Crear Usuario** del login; quedan
 registrados en el proyecto de Firebase y pueden iniciar sesión inmediatamente.
+
+## Reportes
+
+Todos los reportes usan `ReportViewerCore.WinForms` con RDLC embebido como recurso en `Desktop`.
+Se generan a partir de los datos que ya obtienen los servicios de Supabase REST: no requieren
+cambios de backend ni migraciones nuevas.
+
+| Reporte | Acceso | Contenido |
+| --- | --- | --- |
+| Listado de clientes | **Reportes → Listado de Clientes** | `Clientes.rdlc` |
+| Listado de productos | **Reportes → Listado de Productos** | `Productos.rdlc` |
+| Productos filtrados | **Reportes → Productos filtrados** | `ProductosFiltrados.rdlc` |
+| Productos agrupados | **Reportes → Productos agrupados** | `ProductosAgrupados.rdlc` |
+| Comprobante de venta | Botón **Imprimir** en **Ventas** | `VentaComprobante.rdlc` |
+
+- **Productos filtrados**: panel de filtros por texto (nombre/descripción), plataforma, formato y
+  tipo, con botones **Generar** y **Limpiar**. Muestra ID, nombre, tipo, plataforma, formato,
+  precio, stock y valor de stock; el pie del tablix calcula el total de productos, de stock y del
+  inventario con `Count`/`Sum` en el propio RDLC.
+- **Productos agrupados**: los mismos filtros, más el selector **Agrupar por** (Plataforma, Formato
+  o Tipo). El tablix tiene un grupo real (`GrupoProductos` agrupado por `Fields!Grupo.Value`), una
+  fila de encabezado por grupo, las filas de detalle, una fila de subtotal por grupo dentro del
+  grupo jerárquico y una fila de total general al final.
+- **Comprobante de venta**: `VentaComprobanteViewReport` recibe la `Venta` seleccionada y arma dos
+  `ReportDataSource` (`DSVentaCabecera` y `DSVentaDetalle`). Se abre en modo `PrintLayout` y el
+  botón **Imprimir** llama a `ReportViewer.PrintDialog()`; también está disponible la barra
+  nativa del visor.
+- En **Ventas → Nueva Venta** hay un botón **Imprimir** al lado de **Guardar Venta**, y en
+  **Ventas → Lista** otro **Imprimir** junto a **Actualizar**. Ambos abren el comprobante de la
+  venta seleccionada en la grilla de ventas; si no hay ninguna seleccionada se muestra el mensaje
+  «Seleccione una venta de la lista para imprimir». Al guardar, la factura recién creada queda
+  seleccionada automáticamente (`SeleccionarVenta(venta.Number)`), así se puede imprimir de
+  inmediato.
 
 ## Endpoints utilizados
 

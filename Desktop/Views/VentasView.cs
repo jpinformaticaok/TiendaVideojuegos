@@ -1,4 +1,5 @@
 using Desktop.Services;
+using Desktop.ViewReports;
 using FontAwesome.Sharp;
 using Services.Models;
 
@@ -163,9 +164,31 @@ namespace Desktop.Views
                 items.Clear();
                 RefreshGrid();
                 await LoadVentas();
+                SeleccionarVenta(venta.Number);
                 tabControl.SelectedTab = tabPageLista;
             }
             else MessageBox.Show("Error al guardar la venta", "Ventas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void SeleccionarVenta(string numero)
+        {
+            var index = ventas.FindIndex(v => v.Number == numero);
+            if (index < 0 || index >= gridVentas.Rows.Count) return;
+
+            gridVentas.CurrentCell = gridVentas.Rows[index].Cells[0];
+            MostrarDetalle();
+        }
+
+        private void ImprimirVentaSeleccionada()
+        {
+            if (gridVentas.CurrentRow == null || gridVentas.CurrentRow.Index < 0 || gridVentas.CurrentRow.Index >= ventas.Count)
+            {
+                MessageBox.Show("Seleccione una venta de la lista para imprimir.", "Ventas", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var venta = ventas[gridVentas.CurrentRow.Index];
+            new VentaComprobanteViewReport(venta).ShowDialog();
         }
         private void gridVentas_SelectionChanged(object? sender, EventArgs e)
         {
@@ -190,6 +213,16 @@ namespace Desktop.Views
         private async void btnGuardar_Click(object? sender, EventArgs e)
         {
             await GuardarVenta();
+        }
+
+        private void btnImprimir_Click(object? sender, EventArgs e)
+        {
+            ImprimirVentaSeleccionada();
+        }
+
+        private void btnImprimirLista_Click(object? sender, EventArgs e)
+        {
+            ImprimirVentaSeleccionada();
         }
 
     }
